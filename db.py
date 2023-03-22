@@ -5,18 +5,15 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from models import Activities
 from models import Base
-from models import employee_trigger, activity_func
 
 class DB:
     """DB Class for Object Mapping"""
     def __init__(self):
         """Constructor method"""
-        self._engine = create_engine("mysql+mysqlconnector://daniel:dan13l@localhost/project_msc")
+        self._engine = create_engine("mysql+mysqlconnector://root:password@localhost/project_msc")
         Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
         self.__session = None
-        self._engine.connect().execute(activity_func)
-        self._engine.connect().execute(employee_trigger)
         
         
     @property

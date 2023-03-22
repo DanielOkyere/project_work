@@ -101,22 +101,79 @@ class Transaction(Base):
     purchaseOrder = Column(Integer, ForeignKey('purchaseOrder.purchaseOrderNo'))
     productNo = Column(Integer, ForeignKey('product.productNo'))
     
-    
-activity_func = text(''' CREATE FUNCTION IF NOT EXISTS activity_function(activityName VARCHAR(50), activityDesc VARCHAR(255))
-                     RETURNS INTEGER 
-                     DETERMINISTIC
-                     BEGIN
-                     INSERT INTO Activities(activityName, activityDesc)
-                     VALUES (activityName, activityDesc);
-                     RETURN 1;
-                     END;
-                     ''')
+
 
 #Triggers
 employee_trigger = text('''
                         CREATE TRIGGER IF NOT EXISTS employee_ins_tr AFTER INSERT
-                        ON employee FOR EACH ROW
-                        BEGIN
-                            CALL activity_function('Employee added','NEW.employeeEmail' );
-                        END;
+                        ON `employee` FOR EACH ROW
+                        INSERT INTO Activities(activityName, activityDesc)
+                        VALUES("New Employee Insert", "Inserted New Employee");
+                        
+                        CREATE TRIGGER IF NOT EXISTS employee_upd_tr AFTER UPDATE
+                        ON `employee` FOR EACH ROW
+                        INSERT INTO Activities(activityName, activityDesc)
+                        VALUES("Update Employee", "Employee Updated");
                         ''')
+
+product_triggers = text(''' 
+                        CREATE TRIGGER IF NOT EXISTS prod_ins_tr AFTER INSERT
+                        ON `product` FOR EACH ROW
+                        INSERT INTO Activities(activityName, activityDesc)
+                        VALUES("New Product Insert", "Inserted New Product");
+                        
+                        CREATE TRIGGER IF NOT EXISTS prod_ip_tr AFTER UPDATE
+                        ON `product` FOR EACH ROW
+                        INSERT INTO Activities(activityName, activityDesc)
+                        VALUES("Update product", "Product Updated");
+''')
+
+productCategory_trigger = text(''' 
+                        CREATE TRIGGER IF NOT EXISTS category_ins_tr AFTER INSERT
+                        ON `category` FOR EACH ROW
+                        INSERT INTO Activities(activityName, activityDesc)
+                        VALUES("New Category Insert", "Inserted New category");
+                        
+                        CREATE TRIGGER IF NOT EXISTS employee_upd_tr AFTER UPDATE
+                        ON `category` FOR EACH ROW
+                        INSERT INTO Activities(activityName, activityDesc)
+                        VALUES("Update category", "category Updated");
+''')
+
+
+supplier_tr = text(''' 
+                        CREATE TRIGGER IF NOT EXISTS employee_ins_tr AFTER INSERT
+                        ON `employee` FOR EACH ROW
+                        INSERT INTO Activities(activityName, activityDesc)
+                        VALUES("New Employee Insert", "Inserted New Employee");
+                        
+                        CREATE TRIGGER IF NOT EXISTS employee_upd_tr AFTER UPDATE
+                        ON `employee` FOR EACH ROW
+                        INSERT INTO Activities(activityName, activityDesc)
+                        VALUES("Update Employee", "Employee Updated");
+''')
+
+purchaseOrder_tr = text(''' 
+                        CREATE TRIGGER IF NOT EXISTS order_ins_tr AFTER INSERT
+                        ON `employee` FOR EACH ROW
+                        INSERT INTO Activities(activityName, activityDesc)
+                        VALUES("New Employee Insert", "Inserted New Employee");
+                        
+                        CREATE TRIGGER IF NOT EXISTS employee_upd_tr AFTER UPDATE
+                        ON `employee` FOR EACH ROW
+                        INSERT INTO Activities(activityName, activityDesc)
+                        VALUES("Update Employee", "Employee Updated");
+''')
+
+
+transaction_tr = text(''' 
+                        CREATE TRIGGER IF NOT EXISTS employee_ins_tr AFTER INSERT
+                        ON `employee` FOR EACH ROW
+                        INSERT INTO Activities(activityName, activityDesc)
+                        VALUES("New Employee Insert", "Inserted New Employee");
+                        
+                        CREATE TRIGGER IF NOT EXISTS employee_upd_tr AFTER UPDATE
+                        ON `employee` FOR EACH ROW
+                        INSERT INTO Activities(activityName, activityDesc)
+                        VALUES("Update Employee", "Employee Updated");
+''')

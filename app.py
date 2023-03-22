@@ -9,13 +9,15 @@ from flask_cors import CORS
 from models import Employee
 from db import DB
 import json
+from models import employee_trigger, product_triggers
+from models import productCategory_trigger, supplier_tr, purchaseOrder_tr, transaction_tr
 
 app = Flask(__name__)
 CORS(app)
 
 
 db = DB()
-
+db._session.connection().execute(employee_trigger)
 
 @app.route('/', methods=['GET'])
 def home():
