@@ -6,10 +6,10 @@ from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from sqlalchemy import text
 
-
 Base = declarative_base()
 
-#Tables
+
+# Tables
 class Activities(Base):
     """Declaration for activities"""
     __tablename__ = "activities"
@@ -18,8 +18,8 @@ class Activities(Base):
     activityDesc = Column(String(255))
     activityDate = Column(DateTime(timezone=True), server_default=func.now())
     activityUpdated = Column(DateTime(timezone=True), onupdate=func.now())
-    
-    
+
+
 class Employee(Base):
     """Employee Declaration"""
     __tablename__ = "employee"
@@ -28,7 +28,6 @@ class Employee(Base):
     employeeEmail = Column(String(30))
     purchaseOrder = relationship("PurchaseOrder", backref="employee")
 
-    
 
 class ProductCategory(Base):
     """Category Declaration"""
@@ -36,7 +35,7 @@ class ProductCategory(Base):
     categoryNo = Column(Integer, primary_key=True)
     categoryDesc = Column(String(300))
     products = relationship('Product', backref='category')
-    
+
 
 class Product(Base):
     """Product Declaration"""
@@ -51,7 +50,7 @@ class Product(Base):
     reorderLeadTime = Column(DateTime)
     categoryNo = Column(Integer, ForeignKey('category.categoryNo'))
     transaction = relationship('Transaction', backref='product')
-    
+
 
 class Supplier(Base):
     """Supplier Declaration"""
@@ -71,7 +70,7 @@ class Supplier(Base):
     contactEmalAddress = Column(String(25))
     paymentTerms = Column(String(25))
     purchaseOrder = relationship("PurchaseOrder", backref="supplier")
-    
+
 
 class PurchaseOrder(Base):
     """Purchase Order"""
@@ -85,7 +84,7 @@ class PurchaseOrder(Base):
     supplierNo = Column(Integer, ForeignKey('supplier.supplierNo'))
     employeeNo = Column(Integer, ForeignKey('employee.employeeNo'))
     transaction = relationship('Transaction', backref='orders')
-    
+
 
 class Transaction(Base):
     """Transaction Details"""
@@ -100,11 +99,10 @@ class Transaction(Base):
     unitsWastage = Column(Integer)
     purchaseOrder = Column(Integer, ForeignKey('purchaseOrder.purchaseOrderNo'))
     productNo = Column(Integer, ForeignKey('product.productNo'))
-    
 
 
-#Triggers
-employee_trigger = text('''
+# Triggers
+all_triggers = text('''
                         CREATE TRIGGER IF NOT EXISTS employee_ins_tr AFTER INSERT
                         ON `employee` FOR EACH ROW
                         INSERT INTO Activities(activityName, activityDesc)
@@ -114,66 +112,46 @@ employee_trigger = text('''
                         ON `employee` FOR EACH ROW
                         INSERT INTO Activities(activityName, activityDesc)
                         VALUES("Update Employee", "Employee Updated");
-                        ''')
-
-product_triggers = text(''' 
+                        
                         CREATE TRIGGER IF NOT EXISTS prod_ins_tr AFTER INSERT
                         ON `product` FOR EACH ROW
                         INSERT INTO Activities(activityName, activityDesc)
                         VALUES("New Product Insert", "Inserted New Product");
                         
-                        CREATE TRIGGER IF NOT EXISTS prod_ip_tr AFTER UPDATE
+                        CREATE TRIGGER IF NOT EXISTS prod_up_tr AFTER UPDATE
                         ON `product` FOR EACH ROW
                         INSERT INTO Activities(activityName, activityDesc)
-                        VALUES("Update product", "Product Updated");
-''')
+                        VALUES("Update product", "Product Updated"); 
 
-productCategory_trigger = text(''' 
-                        CREATE TRIGGER IF NOT EXISTS category_ins_tr AFTER INSERT
-                        ON `category` FOR EACH ROW
+                        CREATE TRIGGER IF NOT EXISTS supplier_ins_tr AFTER INSERT
+                        ON `supplier` FOR EACH ROW
                         INSERT INTO Activities(activityName, activityDesc)
-                        VALUES("New Category Insert", "Inserted New category");
+                        VALUES("New Supplier Insert", "Inserted New Supplier");
                         
                         CREATE TRIGGER IF NOT EXISTS employee_upd_tr AFTER UPDATE
-                        ON `category` FOR EACH ROW
+                        ON `supplier` FOR EACH ROW
                         INSERT INTO Activities(activityName, activityDesc)
-                        VALUES("Update category", "category Updated");
-''')
+                        VALUES("Update Supplier", "Supplier Updated");
 
-
-supplier_tr = text(''' 
-                        CREATE TRIGGER IF NOT EXISTS employee_ins_tr AFTER INSERT
-                        ON `employee` FOR EACH ROW
+                         CREATE TRIGGER IF NOT EXISTS order_ins_tr AFTER INSERT
+                        ON `purchaseOrder` FOR EACH ROW
                         INSERT INTO Activities(activityName, activityDesc)
-                        VALUES("New Employee Insert", "Inserted New Employee");
+                        VALUES("New order Insert", "Inserted New order");
                         
                         CREATE TRIGGER IF NOT EXISTS employee_upd_tr AFTER UPDATE
-                        ON `employee` FOR EACH ROW
+                        ON `purchaseOrder` FOR EACH ROW
                         INSERT INTO Activities(activityName, activityDesc)
-                        VALUES("Update Employee", "Employee Updated");
-''')
-
-purchaseOrder_tr = text(''' 
-                        CREATE TRIGGER IF NOT EXISTS order_ins_tr AFTER INSERT
-                        ON `employee` FOR EACH ROW
-                        INSERT INTO Activities(activityName, activityDesc)
-                        VALUES("New Employee Insert", "Inserted New Employee");
+                        VALUES("Update Order", "Order Updated");
                         
-                        CREATE TRIGGER IF NOT EXISTS employee_upd_tr AFTER UPDATE
-                        ON `employee` FOR EACH ROW
+                        CREATE TRIGGER IF NOT EXISTS transaction_ins_tr AFTER INSERT
+                        ON `transaction` FOR EACH ROW
                         INSERT INTO Activities(activityName, activityDesc)
-                        VALUES("Update Employee", "Employee Updated");
-''')
-
-
-transaction_tr = text(''' 
-                        CREATE TRIGGER IF NOT EXISTS employee_ins_tr AFTER INSERT
-                        ON `employee` FOR EACH ROW
-                        INSERT INTO Activities(activityName, activityDesc)
-                        VALUES("New Employee Insert", "Inserted New Employee");
+                        VALUES("New Employee transaction", "Inserted New transaction");
                         
-                        CREATE TRIGGER IF NOT EXISTS employee_upd_tr AFTER UPDATE
-                        ON `employee` FOR EACH ROW
+                        CREATE TRIGGER IF NOT EXISTS transaction_upd_tr AFTER UPDATE
+                        ON `transaction` FOR EACH ROW
                         INSERT INTO Activities(activityName, activityDesc)
-                        VALUES("Update Employee", "Employee Updated");
-''')
+                        VALUES("Update Transaction", "Transaction Updated");
+                        ''')
+
+select_product = text('''SELECT * FROM `product`;''')
