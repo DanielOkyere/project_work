@@ -27,6 +27,7 @@ db = DB()
 def home():
     """Base for Website"""
     return render_template('index.html')
+<<<<<<< HEAD
 
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
@@ -67,6 +68,8 @@ def employeePage():
 def activities():
     """Activities Page"""
     return render_template('activities.html')
+=======
+>>>>>>> d1d4d54 (setup python and sql)
 
 
 # Employee Route

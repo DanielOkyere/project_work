@@ -8,6 +8,7 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='styles.css')}}"
     />
+<<<<<<< HEAD
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -55,5 +56,17 @@
 
     <script src="{{ url_for('static', filename='script.js')}}"></script>
     <script src="{{ url_for('static', filename='interactivity.js')}}"></script>
+=======
+    <title>Inventory Control App</title>
+  </head>
+  <body>
+    <h1>Inventory Control App</h1>
+    <button id="insert-btn">Insert</button>
+    <button id="retrieve-btn">Retrieve</button>
+    <button id="update-btn">Update</button>
+    <button id="delete-btn">Delete</button>
+
+    <script src="{{ url_for('static', filename='script.js')}}"></script>
+>>>>>>> d1d4d54 (setup python and sql)
   </body>
 </html>
