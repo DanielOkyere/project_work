@@ -10,7 +10,7 @@ class DB:
     """DB Class for Object Mapping"""
     def __init__(self):
         """Constructor method"""
-        self._engine = create_engine("mysql+mysqlconnector://root:password@localhost/project_msc")
+        self._engine = create_engine("mysql+mysqlconnector://test:Pa$$word1234@localhost/project_msc")
         Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
         self.__session = None

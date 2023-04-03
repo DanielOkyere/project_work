@@ -22,7 +22,7 @@ db._session.connection().execute(employee_trigger)
 @app.route('/', methods=['GET'])
 def home():
     """Base for Website"""
-    return render_template('home.html')
+    return render_template('index.html')
 
 @app.route('/employee', methods=['GET', 'POST'])
 def employee():
