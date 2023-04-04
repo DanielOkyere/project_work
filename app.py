@@ -24,6 +24,11 @@ def home():
     """Base for Website"""
     return render_template('index.html')
 
+@app.route('/dashboard', methods=['GET'])
+def dashboard():
+    """Base for Website"""
+    return render_template('dashboard.html')
+
 @app.route('/employee', methods=['GET', 'POST'])
 def employee():
     """Employee"""
