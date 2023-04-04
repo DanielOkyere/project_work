@@ -61,7 +61,6 @@ def activities():
     """Activities Page"""
     return render_template('activities.html')
 
-# Employee Route
 @app.route('/employee', methods=['GET', 'POST'])
 def employee():
     """Employee"""
