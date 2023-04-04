@@ -71,8 +71,16 @@ def activities():
 =======
 >>>>>>> d1d4d54 (setup python and sql)
 
+<<<<<<< HEAD
 
 # Employee Route
+=======
+@app.route('/dashboard', methods=['GET'])
+def dashboard():
+    """Base for Website"""
+    return render_template('dashboard.html')
+
+>>>>>>> a6ab0bc (designing ui)
 @app.route('/employee', methods=['GET', 'POST'])
 def employee():
     """Employee"""

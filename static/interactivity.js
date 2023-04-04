@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const showtables = document.getElementById('showTables');
 const tablesDropDown = document.getElementById('buttonDropDown');
 const iframe = document.getElementById('pageFrame');
@@ -13,6 +14,14 @@ const activities = document.getElementById('activities');
 
 // event listeners
 showtables.addEventListener('click', function () {
+=======
+const tables = document.getElementById('showTables');
+const tablesDropDown = document.getElementById('buttonDropDown');
+const iframe = document.getElementById('pageFrame');
+const inventory = document.getElementById('inventory');
+
+tables.addEventListener('click', function () {
+>>>>>>> 23b11b4 (designing ui)
   if (tablesDropDown.style.display === 'none') {
     tablesDropDown.style.display = 'flex';
   } else {
@@ -20,6 +29,7 @@ showtables.addEventListener('click', function () {
   }
 });
 
+<<<<<<< HEAD
 dashboard.addEventListener('click', () => {
   loadHTMLPage('/dashboard');
 });
@@ -46,6 +56,12 @@ activities.addEventListener('click', () => {
 });
 
 // functions
+=======
+inventory.addEventListener('click', () => {
+  loadHTMLPage('/dashboard');
+});
+
+>>>>>>> 23b11b4 (designing ui)
 function loadHTMLPage(url) {
   iframe.src = url;
 }

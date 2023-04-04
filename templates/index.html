@@ -9,12 +9,16 @@
       href="{{ url_for('static', filename='styles.css')}}"
     />
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 23b11b4 (designing ui)
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+<<<<<<< HEAD
     <title>Inventory Control App</title>
   </head>
   <body>
@@ -57,16 +61,48 @@
     <script src="{{ url_for('static', filename='script.js')}}"></script>
     <script src="{{ url_for('static', filename='interactivity.js')}}"></script>
 =======
+=======
+>>>>>>> 23b11b4 (designing ui)
     <title>Inventory Control App</title>
   </head>
   <body>
-    <h1>Inventory Control App</h1>
-    <button id="insert-btn">Insert</button>
-    <button id="retrieve-btn">Retrieve</button>
-    <button id="update-btn">Update</button>
-    <button id="delete-btn">Delete</button>
+    <header>
+      <nav>
+        <h1>Inventory Control App</h1>
+      </nav>
+    </header>
+    <main class="container">
+      <section id="sidebar">
+        <ul>
+          <li><button>dashboard</button></li>
+          <li><button id="showTables">tables</button></li>
+          <div id="buttonDropDown">
+            <button id="inventory">one</button>
+            <button>two</button>
+            <button>three</button>
+          </div>
+        </ul>
+      </section>
+      <section id="mainArea">
+        <!-- <button id="insert-btn">Insert</button>
+        <button id="retrieve-btn">Retrieve</button>
+        <button id="update-btn">Update</button>
+        <button id="delete-btn">Delete</button> -->
+        <iframe
+          id="pageFrame"
+          width="100%"
+          height="100%"
+          frameborder="0"
+          src="about:blank"
+        ></iframe>
+      </section>
+    </main>
 
     <script src="{{ url_for('static', filename='script.js')}}"></script>
+<<<<<<< HEAD
 >>>>>>> d1d4d54 (setup python and sql)
+=======
+    <script src="{{ url_for('static', filename='interactivity.js')}}"></script>
+>>>>>>> 23b11b4 (designing ui)
   </body>
 </html>
