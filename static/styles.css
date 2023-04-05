@@ -40,7 +40,8 @@ body {
 }
 
 /* utilities */
-button {
+button,
+.submitButtons {
   padding: 15px;
   margin: 10px;
   font-size: 15px;
@@ -50,4 +51,17 @@ button {
 button:hover {
   opacity: 0.8;
   background: green;
+}
+
+/* Tables */
+table {
+  width: 60vw;
+  margin: 0 auto;
+}
+
+/* Forms */
+#employeeForm {
+  width: 30vw;
+  margin: 0 auto;
+  text-align: left;
 }

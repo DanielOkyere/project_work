@@ -1,5 +1,6 @@
 const addEmployee = document.getElementById('addEmployee');
 const employeetable = document.getElementById('employeetable');
+const etable = document.getElementById('etable');
 
 addEmployee.addEventListener('click', () => {
   addRow();
@@ -42,12 +43,45 @@ form.addEventListener('submit', function (event) {
   xhr.onreadystatechange = function () {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
-        console.log(xhr.responseText);
+        // console.log(xhr.responseText);
+        form.reset();
       } else {
         console.error(xhr.status);
       }
     }
   };
-  console.log(JSON.stringify(data));
+  // console.log(JSON.stringify(data));
   xhr.send(JSON.stringify(data));
 });
+
+fetch('/employee')
+  .then((response) => response.json())
+  .then((data) => {
+    let employees = data.data;
+    employees.forEach((employee) => {
+      console.log(employee);
+      // const div = document.createElement('div');
+      // div.innerHTML = employee.name;
+      // etable.appendChild(div);
+
+      const row = document.createElement('tr');
+      const idCell = document.createElement('td');
+      const nameCell = document.createElement('td');
+      const emailCell = document.createElement('td');
+      const actionCell = document.createElement('td');
+
+      idCell.textContent = employee.employeeNo;
+      nameCell.textContent = employee.name;
+      emailCell.textContent = employee.email;
+      actionCell.innerHTML =
+        '<button class="deleteButton" onclick="deleteRow(this)">Delete</button>';
+
+      row.appendChild(idCell);
+      row.appendChild(nameCell);
+      row.appendChild(emailCell);
+      row.appendChild(actionCell);
+
+      employeetable.querySelector('tbody').appendChild(row);
+    });
+  })
+  .catch((error) => console.error(error));

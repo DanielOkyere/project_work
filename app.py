@@ -67,7 +67,7 @@ def employee():
     """Employee"""
     if request.method == 'GET':
         employees = db.get_employee()
-        data = [{"name": employee.employeeName, "employeeNo": employee.employeeNo} for employee in employees]
+        data = [{"name": employee.employeeName, "employeeNo": employee.employeeNo, "email": employee.employeeEmail} for employee in employees]
         return jsonify({"message": "employees Retrieved", "data": data})
     elif request.method == 'POST':
         new_employees = request.json
@@ -89,7 +89,7 @@ def product():
                  "unitPrice": product.unitPrice,
                  "reorderlevel": product.reorderLevel
                  } for prod in products]
-        return jsonify({"message": "Product Created Successfully",
+        return jsonify({"message": "Product Retrieved Successfully",
                         "data": data
                         })
 
