@@ -48,5 +48,6 @@ form.addEventListener('submit', function (event) {
       }
     }
   };
+  console.log(JSON.stringify(data));
   xhr.send(JSON.stringify(data));
 });

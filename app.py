@@ -78,9 +78,9 @@ def employee():
         print(new_employees)
         
         session.add(Employee(
-            employeeNo=uuid.uuid4,
-            employeeName=new_employees.get('employeeName'),
-            employeeEmail=new_employees.get('employeeEmail')
+            # employeeNo=uuid.uuid4(),
+            employeeName=new_employees.get('name'),
+            employeeEmail=new_employees.get('email')
             ))
         session.commit()
         return jsonify(new_employees)
