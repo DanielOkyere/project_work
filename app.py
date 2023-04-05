@@ -77,10 +77,38 @@ def activities():
 =======
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
-    """Base for Website"""
+    """Dashboard Page"""
     return render_template('dashboard.html')
 
+<<<<<<< HEAD
 >>>>>>> a6ab0bc (designing ui)
+=======
+@app.route('/products', methods=['GET'])
+def products():
+    """Products Page"""
+    return render_template('products.html')
+
+@app.route('/productCategories', methods=['GET'])
+def productCategories():
+    """Products Categories Page"""
+    return render_template('productCategories.html')
+
+@app.route('/purchaseOrders', methods=['GET'])
+def purchaseOrders():
+    """Purchase Orders Page"""
+    return render_template('purchaseOrders.html')
+
+@app.route('/suppliers', methods=['GET'])
+def suppliers():
+    """Suppliers Page"""
+    return render_template('suppliers.html')
+
+@app.route('/transactions', methods=['GET'])
+def transactions():
+    """Transactions Page"""
+    return render_template('transactions.html')
+
+>>>>>>> df2312a (added html pages for all tables)
 @app.route('/employee', methods=['GET', 'POST'])
 def employee():
     """Employee"""
