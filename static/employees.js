@@ -48,6 +48,9 @@ form.addEventListener('submit', function (event) {
       }
     }
   };
+<<<<<<< HEAD
   console.log(JSON.stringify(data));
+=======
+>>>>>>> 78d3e55 (created employee form)
   xhr.send(JSON.stringify(data));
 });

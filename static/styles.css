@@ -79,8 +79,12 @@ body {
 #mainArea {
   width: 85vw;
   height: 100vh;
+<<<<<<< HEAD
   background: red;
 >>>>>>> d1d4d54 (setup python and sql)
+=======
+  background: rgba(255, 253, 208, 0.3);
+>>>>>>> 78d3e55 (created employee form)
 }
 
 #buttonDropDown {
