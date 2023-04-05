@@ -31,7 +31,7 @@ body {
 #mainArea {
   width: 85vw;
   height: 100vh;
-  background: red;
+  background: rgba(255, 253, 208, 0.3);
 }
 
 #buttonDropDown {

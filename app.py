@@ -9,6 +9,7 @@ from flask_cors import CORS
 from models import Employee
 from db import DB
 import json
+import uuid
 from models import employee_trigger, product_triggers
 from models import productCategory_trigger, supplier_tr, purchaseOrder_tr, transaction_tr
 
@@ -54,6 +55,16 @@ def transactions():
     """Transactions Page"""
     return render_template('transactions.html')
 
+@app.route('/employees', methods=['GET'])
+def employeePage():
+    """Employee Page"""
+    return render_template('employees.html')
+
+@app.route('/activities', methods=['GET'])
+def activities():
+    """Activities Page"""
+    return render_template('activities.html')
+
 @app.route('/employee', methods=['GET', 'POST'])
 def employee():
     """Employee"""
@@ -67,12 +78,13 @@ def employee():
         print(new_employees)
         
         session.add(Employee(
-            # employeeNo=new_employees.employeeNo,
+            employeeNo=uuid.uuid4,
             employeeName=new_employees.get('employeeName'),
             employeeEmail=new_employees.get('employeeEmail')
             ))
         session.commit()
         return jsonify(new_employees)
+
     
 
 
