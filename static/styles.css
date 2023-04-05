@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 23b11b4 (designing ui)
 html {
   box-sizing: border-box;
 }
@@ -14,7 +10,6 @@ html {
   padding: 0;
 }
 
-<<<<<<< HEAD
 body {
   font-family: 'Poppins', sans-serif;
   background: #fff;
@@ -37,54 +32,6 @@ body {
   width: 85vw;
   height: 100vh;
   background: rgba(255, 253, 208, 0.3);
-}
-
-#buttonDropDown {
-  display: flex;
-  flex-direction: column;
-}
-
-/* utilities */
-button {
-  padding: 15px;
-  margin: 10px;
-  font-size: 15px;
-  border-radius: 5px;
-}
-
-button:hover {
-  opacity: 0.8;
-  background: green;
-=======
-=======
->>>>>>> 23b11b4 (designing ui)
-body {
-  font-family: 'Poppins', sans-serif;
-  background: #fff;
-  color: #000;
-  font-size: 17px;
-  line-height: 1.5;
-}
-
-.container {
-  display: flex;
-}
-
-#sidebar {
-  width: 15vw;
-  height: 100vh;
-  background: blue;
-}
-
-#mainArea {
-  width: 85vw;
-  height: 100vh;
-<<<<<<< HEAD
-  background: red;
->>>>>>> d1d4d54 (setup python and sql)
-=======
-  background: rgba(255, 253, 208, 0.3);
->>>>>>> 78d3e55 (created employee form)
 }
 
 #buttonDropDown {

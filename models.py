@@ -122,7 +122,6 @@ all_triggers = text('''
                         ON `product` FOR EACH ROW
                         INSERT INTO Activities(activityName, activityDesc)
                         VALUES("Update product", "Product Updated"); 
-
                         CREATE TRIGGER IF NOT EXISTS supplier_ins_tr AFTER INSERT
                         ON `supplier` FOR EACH ROW
                         INSERT INTO Activities(activityName, activityDesc)
@@ -132,7 +131,6 @@ all_triggers = text('''
                         ON `supplier` FOR EACH ROW
                         INSERT INTO Activities(activityName, activityDesc)
                         VALUES("Update Supplier", "Supplier Updated");
-
                          CREATE TRIGGER IF NOT EXISTS order_ins_tr AFTER INSERT
                         ON `purchaseOrder` FOR EACH ROW
                         INSERT INTO Activities(activityName, activityDesc)
