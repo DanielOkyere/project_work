@@ -14,11 +14,7 @@ class DB:
 
     def __init__(self):
         """Constructor method"""
-<<<<<<< HEAD
-        self._engine = create_engine("mysql+mysqlconnector://test:Pa$$word1234@localhost/project_msc")
-=======
         self._engine = create_engine("mysql+mysqlconnector://root:password@localhost/msc_program_db")
->>>>>>> 5ad34aed42531f52ad7a25ee313d017b8cf74778
         # Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
         self.__session = None
@@ -102,11 +98,7 @@ class DB:
     def add_category(self, category_data):
         """Adds a new category"""
         new_category = ProductCategory(
-<<<<<<< HEAD
-            categoryDesc=category_data,
-=======
             categoryDesc=category_data
->>>>>>> 5ad34aed42531f52ad7a25ee313d017b8cf74778
         )
         self._session.add(new_category)
         self._session.commit()
@@ -116,18 +108,18 @@ class DB:
         """Creates a new supplier"""
         new_supplier = Supplier(
             supplierName = supplier_data['supplierName'],
-              supplierStreet = supplier_data['supplierStreet'],
+            supplierStreet = supplier_data['supplierStreet'],
             supplierCity = supplier_data['supplierCity'],
-    supplierState = supplier_data['supplierState'],
-    supplierZipCode = supplier_data['supplierZipCode'],
-    suppTelNo = supplier_data['suppTelNo'],
-    suppFaxNo = supplier_data['suppFaxNo'],
-    suppEmailAddress = supplier_data['suppEmailAddress'],
-    contactName = supplier_data['contactName'],
-    contactTelNo = supplier_data['contactTelNo'],
-    contactFaxNo = supplier_data['contactFaxNo'],
-    contactEmalAddress = supplier_data['contactEmailAddress'],
-    paymentTerms = supplier_data['paymentTerms'],
+            supplierState = supplier_data['supplierState'],
+            supplierZipCode = supplier_data['supplierZipCode'],
+            suppTelNo = supplier_data['suppTelNo'],
+            suppFaxNo = supplier_data['suppFaxNo'],
+            suppEmailAddress = supplier_data['suppEmailAddress'],
+            contactName = supplier_data['contactName'],
+            contactTelNo = supplier_data['contactTelNo'],
+            contactFaxNo = supplier_data['contactFaxNo'],
+            contactEmailAddress = supplier_data['contactEmailAddress'],
+            paymentTerms = supplier_data['paymentTerms'],
         )
         self._session.add(new_supplier)
         self._session.commit()
@@ -167,11 +159,11 @@ class DB:
         print(new_transaction)
         new_t = Transaction(
             transactionDescription = new_transaction['transactionDescription'],
-    unitPrice = new_transaction['unitPrice'],
-    unitsOrdered = new_transaction['unitsOrdered'],
-    unitsReceived = new_transaction['unitsReceived'],
-    unitsSold = new_transaction['unitsSold'],
-    unitsWastage = new_transaction['unitsWastage']
+            unitPrice = new_transaction['unitPrice'],
+            unitsOrdered = new_transaction['unitsOrdered'],
+            unitsReceived = new_transaction['unitsReceived'],
+            unitsSold = new_transaction['unitsSold'],
+            unitsWastage = new_transaction['unitsWastage']
         )
         self._session.add(new_t)
         self._session.commit()

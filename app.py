@@ -100,13 +100,11 @@ def product():
 
     if request.method == 'POST':
         body = request.json
-        print(body)
         products = db.add_product(
-            body
+           body_object=body
         )
         return jsonify({
             "message": "product added successfully",
-            "data": products
         })
 
 
@@ -122,7 +120,6 @@ def category_route():
            "categoryDesc": category.categoryDesc,
            "categoryNo": category.categoryNo
         } for category in categories]
-        print(results)
         return jsonify({
             "message": "catgories retrieved",
             "data": results
@@ -130,7 +127,6 @@ def category_route():
     if request.method == 'POST':
         body = request.json
         category = db.add_category(body['categoryDesc']);
-        print(category)
         return jsonify({
             "message": "Category Created",
         })
@@ -143,23 +139,23 @@ def supplier_routes():
     if request.method == 'GET':
         suppliers = db.get_supplier()
         result = [{
-            supplierName : supplier_data['supplierName'],
-            supplierStreet : supplier_data['supplierStreet'],
-            supplierCity : supplier_data['supplierCity'],
-            supplierState : supplier_data['supplierState'],
-    supplierZipCode : supplier_data['supplierZipCode'],
-    suppTelNo : supplier_data['suppTelNo'],
-    suppFaxNo : supplier_data['suppFaxNo'],
-    suppEmailAddress : supplier_data['suppEmailAddress'],
-    contactName : supplier_data['contactName'],
-    contactTelNo : supplier_data['contactTelNo'],
-    contactFaxNo : supplier_data['contactFaxNo'],
-    contactEmailAddress : supplier_data['contactEmalAddress'],
-    paymentTerms : supplier_data['paymentTerms'],
+            "supplierName" : supplier.supplierName,
+            "supplierStreet" : supplier.supplierStreet,
+            "supplierCity" : supplier.supplierCity,
+            "supplierState" : supplier.supplierState,
+            "supplierZipCode" : supplier.supplierZipCode,
+            "suppTelNo" : supplier.suppTelNo,
+            "suppFaxNo" : supplier.suppFaxNo,
+            "suppEmailAddress" : supplier.suppEmailAddress,
+            "contactName" : supplier.contactName,
+            "contactTelNo" : supplier.contactTelNo,
+            "contactFaxNo" : supplier.contactFaxNo,
+            "contactEmailAddress" : supplier.contactEmailAddress,
+            "paymentTerms" : supplier.paymentTerms,
         }for supplier in suppliers]
         return jsonify({
             "message": "supplier created",
-            "data": supplier
+            "data": result
         })
 
     if request.method == 'POST':
