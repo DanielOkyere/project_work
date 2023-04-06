@@ -9,7 +9,9 @@ from flask_cors import CORS
 from models import Employee, Product
 from db import DB
 import json
-from models import all_triggers, select_product
+import uuid
+import json
+
 app = Flask(__name__)
 CORS(app)
 
@@ -61,7 +63,7 @@ def activities():
     """Activities Page"""
     return render_template('activities.html')
 
-@app.route('/employee', methods=['GET', 'POST'])
+@app.route('/employee', methods=['GET', 'POST', 'DELETE', 'PUT'])
 def employee():
     """Employee"""
     if request.method == 'GET':
@@ -113,20 +115,20 @@ def category_route():
     if request.method == 'GET':
         categories = db.get_categories()
         results = [{
-            "categoryNo": category.get('categoryNo'),
-            "categoryDesc": category.get('categoryDesc'),
-            "products": category.get('products')
+           "categoryDesc": category.categoryDesc,
+           "categoryNo": category.categoryNo
         } for category in categories]
+        print(results)
         return jsonify({
             "message": "catgories retrieved",
             "data": results
         })
     if request.method == 'POST':
         body = request.json
-        category = db.add_category(body)
+        category = db.add_category(body['categoryDesc']);
+        print(category)
         return jsonify({
             "message": "Category Created",
-            "data": category
         })
 
 
@@ -135,7 +137,22 @@ def category_route():
 def supplier_routes():
     """Defines the supplier routes"""
     if request.method == 'GET':
-        supplier = db.get_supplier()
+        suppliers = db.get_supplier()
+        result = [{
+            supplierName : supplier_data['supplierName'],
+            supplierStreet : supplier_data['supplierStreet'],
+            supplierCity : supplier_data['supplierCity'],
+            supplierState : supplier_data['supplierState'],
+    supplierZipCode : supplier_data['supplierZipCode'],
+    suppTelNo : supplier_data['suppTelNo'],
+    suppFaxNo : supplier_data['suppFaxNo'],
+    suppEmailAddress : supplier_data['suppEmailAddress'],
+    contactName : supplier_data['contactName'],
+    contactTelNo : supplier_data['contactTelNo'],
+    contactFaxNo : supplier_data['contactFaxNo'],
+    contactEmailAddress : supplier_data['contactEmalAddress'],
+    paymentTerms : supplier_data['paymentTerms'],
+        }for supplier in suppliers]
         return jsonify({
             "message": "supplier created",
             "data": supplier
@@ -146,7 +163,6 @@ def supplier_routes():
         new_supplier = db.add_supplier(body)
         return jsonify({
             "message": "new supplier",
-            "data": new_supplier
         })
 
 # Purchase Order Routes
@@ -154,7 +170,17 @@ def supplier_routes():
 def order_routes():
     """Defines order routes"""
     if request.method == 'GET':
-        result = db.get_orders()
+        orders = db.get_orders()
+        result = [{
+            "orderNo": order.purchaseOrderNo,
+            "orderDesc": order.purchaseOrderDesc,
+            "orderDate": order.orderDate,
+            "dateRequired": order.dateRequired,
+            "shippedDate": order.shippedDate,
+            "freightCharge": order.freightCharge,
+            "supplierNo": order.supplierNo,
+            "employeeNo": order.employeeNo
+        } for order in orders]
         return jsonify({
             "message": "order retrieved",
             "data": result
@@ -165,10 +191,38 @@ def order_routes():
         result = db.add_orders(new_data)
         return jsonify({
             "message": "created New order",
-            "data": result
         })
 
 # Transaction Routes
+@app.route('/transaction', methods=['GET','POST'])
+def transact_routes():
+    """Defines the transaction routes"""
+    if request.method == 'GET':
+        transactions = db.get_transactions()
+        result = [{
+          "transactionNo": trans.transactionNo,
+          "transactionDate": trans.transactionDate,
+          "transactionDescription": trans.transactionDescription,
+          "unitPrice": trans.unitPrice,
+          "unitsOrdered": trans.unitsOrdered,
+          "unitsReceived": trans.unitsReceived,
+          "unitsSold": trans.unitsSold,
+          "unitsWastage": trans.unitsWastage,
+          "purchaseOrder": trans.purchaseOrder,
+          "productNo": trans.productNo
+        } for trans in transactions]
+        return jsonify({
+            "message": "transactions recieved",
+            "results": result
+        })
+    if request.method == 'POST':
+        new_transaction = request.json
+        result = db.add_transactions(
+            new_transaction
+        )
+        return jsonify({
+            "message":"created new Transaction"
+        })
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000", debug=True)

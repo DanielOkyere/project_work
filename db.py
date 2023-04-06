@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from sqlalchemy.exc import InvalidRequestError, NoResultFound
 from models import Activities
-from models import Base, Employee, Product, ProductCategory, PurchaseOrder, Supplier
+from models import Base, Employee, Product, ProductCategory, PurchaseOrder, Supplier, Transaction
 from models import all_triggers
 
 
@@ -14,8 +14,8 @@ class DB:
 
     def __init__(self):
         """Constructor method"""
-        self._engine = create_engine("mysql+mysqlconnector://test:Pa$$word1234@localhost/project_msc")
-        Base.metadata.drop_all(self._engine)
+        self._engine = create_engine("mysql+mysqlconnector://root:password@localhost/msc_program_db")
+        # Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
         self.__session = None
 
@@ -98,8 +98,7 @@ class DB:
     def add_category(self, category_data):
         """Adds a new category"""
         new_category = ProductCategory(
-            categoryDesc=category_data.get('categoryDesc'),
-            products=category_data.get('products')
+            categoryDesc=category_data
         )
         self._session.add(new_category)
         self._session.commit()
@@ -108,7 +107,19 @@ class DB:
     def add_supplier(self, supplier_data):
         """Creates a new supplier"""
         new_supplier = Supplier(
-            supplier_data
+            supplierName = supplier_data['supplierName'],
+              supplierStreet = supplier_data['supplierStreet'],
+            supplierCity = supplier_data['supplierCity'],
+    supplierState = supplier_data['supplierState'],
+    supplierZipCode = supplier_data['supplierZipCode'],
+    suppTelNo = supplier_data['suppTelNo'],
+    suppFaxNo = supplier_data['suppFaxNo'],
+    suppEmailAddress = supplier_data['suppEmailAddress'],
+    contactName = supplier_data['contactName'],
+    contactTelNo = supplier_data['contactTelNo'],
+    contactFaxNo = supplier_data['contactFaxNo'],
+    contactEmalAddress = supplier_data['contactEmailAddress'],
+    paymentTerms = supplier_data['paymentTerms'],
         )
         self._session.add(new_supplier)
         self._session.commit()
@@ -127,11 +138,38 @@ class DB:
 
     def add_orders(self, new_order):
         """Creates a new order"""
-        new_order_data = PurchaseOrder(new_order)
+        print(new_order)
+        new_order_data = PurchaseOrder(
+            purchaseOrderDesc = new_order['purchaseOrderDesc'],
+            orderDate = new_order['orderDate'],
+            dateRequired = new_order['dateRequired'],
+            shippedDate = new_order['shippedDate'],
+            freightCharge = new_order['freightCharge'],
+            supplierNo = new_order['supplierNo'],
+            employeeNo = new_order['employeeNo'],
+            transaction = new_order['transaction'],
+            )
         self._session.add(new_order_data)
         self._session.commit()
 
         return new_order_data
 
     def add_transactions(self, new_transaction):
-        """"""
+        """Creates a new transaction"""
+        print(new_transaction)
+        new_t = Transaction(
+            transactionDescription = new_transaction['transactionDescription'],
+    unitPrice = new_transaction['unitPrice'],
+    unitsOrdered = new_transaction['unitsOrdered'],
+    unitsReceived = new_transaction['unitsReceived'],
+    unitsSold = new_transaction['unitsSold'],
+    unitsWastage = new_transaction['unitsWastage']
+        )
+        self._session.add(new_t)
+        self._session.commit()
+        return new_t
+
+    def get_transactions(self):
+        """Get transactions"""
+        transactions = self._session.query(Transaction).all()
+        return transactions
