@@ -83,12 +83,16 @@ def product():
     """Product Endpoint"""
     if request.method == 'GET':
         products = db.get_product()
-        data = [{"id": products.productNO,
+        data = [{"id": product.productNo,
                  "name": product.productName,
                  "serialNo": product.serialNo,
                  "unitPrice": product.unitPrice,
-                 "reorderlevel": product.reorderLevel
-                 } for prod in products]
+                 "quantityOnHand":product.quantityOnHand,
+                 "reorderlevel": product.reorderLevel,
+                 "reorderQuantity": product.reorderQuantity,
+                 "reorderLeadTimeCell": product.reorderLeadTime,
+                 "categoryNo": product.categoryNo,
+                 } for product in products]
         return jsonify({"message": "Product Retrieved Successfully",
                         "data": data
                         })
@@ -114,9 +118,8 @@ def category_route():
     if request.method == 'GET':
         categories = db.get_categories()
         results = [{
-            "categoryNo": category.get('categoryNo'),
-            "categoryDesc": category.get('categoryDesc'),
-            "products": category.get('products')
+            "categoryNo": category.categoryNo,
+            "categoryDesc": category.categoryDesc,
         } for category in categories]
         return jsonify({
             "message": "catgories retrieved",
@@ -124,10 +127,9 @@ def category_route():
         })
     if request.method == 'POST':
         body = request.json
-        category = db.add_category(body)
+        category = db.add_category(body['categoryDesc'])
         return jsonify({
             "message": "Category Created",
-            "data": category
         })
 
 
@@ -162,11 +164,11 @@ def order_routes():
         })
 
     if request.method == 'POST':
-        new_data = request.json
-        result = db.add_orders(new_data)
+        body = request.json
+        new_order = db.add_orders(body)
         return jsonify({
-            "message": "created New order",
-            "data": result
+            "message": "new order",
+            "data": new_order
         })
 
 # Transaction Routes

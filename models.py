@@ -48,7 +48,7 @@ class Product(Base):
     reorderLevel = Column(Integer)
     reorderQuantity = Column(Integer)
     reorderLeadTime = Column(DateTime)
-    categoryNo = Column(Integer, ForeignKey('category.categoryNo'))
+    categoryNo = Column(Integer, ForeignKey('category.categoryNo'), nullable=True)
     transaction = relationship('Transaction', backref='product')
 
 

@@ -15,7 +15,7 @@ class DB:
     def __init__(self):
         """Constructor method"""
         self._engine = create_engine("mysql+mysqlconnector://test:Pa$$word1234@localhost/project_msc")
-        Base.metadata.drop_all(self._engine)
+        # Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
         self.__session = None
 
@@ -98,8 +98,7 @@ class DB:
     def add_category(self, category_data):
         """Adds a new category"""
         new_category = ProductCategory(
-            categoryDesc=category_data.get('categoryDesc'),
-            products=category_data.get('products')
+            categoryDesc=category_data,
         )
         self._session.add(new_category)
         self._session.commit()

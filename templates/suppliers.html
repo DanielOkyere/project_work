@@ -4,9 +4,119 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css')}}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <title>Suppliers</title>
   </head>
   <body>
     <h1>Suppliers</h1>
+
+    <section id="stable">
+      <table id="supplierTable">
+        <tr>
+          <th>Supplier No.</th>
+          <th>Supplier Name</th>
+          <th>Supplier Street</th>
+          <th>Supplier City</th>
+          <th>Supplier State</th>
+          <th>Supplier Zip Code</th>
+          <th>Supplier Tel No.</th>
+          <th>Supplier Fax No</th>
+          <th>Supplier Email Address</th>
+          <th>Supplier Web Address</th>
+          <th>Contact Name</th>
+          <th>Contact Tel No.</th>
+          <th>Contact Fax No.</th>
+          <th>Contact Email Address</th>
+          <th>Payment Terms</th>
+          <th>Actions</th>
+        </tr>
+        <tr>
+          <td>Row 1, Cell 1</td>
+          <td>Row 1, Cell 2</td>
+          <td>Row 1, Cell 3</td>
+          <td>Row 1, Cell 4</td>
+          <td>Row 1, Cell 5</td>
+          <td>Row 1, Cell 6</td>
+          <td>Row 1, Cell 7</td>
+          <td>Row 1, Cell 8</td>
+          <td>Row 1, Cell 9</td>
+          <td>Row 1, Cell 10</td>
+          <td>Row 1, Cell 11</td>
+          <td>Row 1, Cell 12</td>
+          <td>Row 1, Cell 13</td>
+          <td>Row 1, Cell 14</td>
+          <td>Row 1, Cell 15</td>
+          <td>
+            <button class="deleteButton" onclick="deleteRow(this)">
+              Delete
+            </button>
+          </td>
+        </tr>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section>
+      <form action="" method="" id="supplierForm">
+        <label for="supplierName">Supplier Name:</label>
+        <input type="text" id="supplierName" name="supplierName" /><br />
+
+        <label for="supplierStreet">Supplier Street:</label>
+        <input type="text" id="supplierStreet" name="supplierStreet" /><br />
+
+        <label for="supplierCity">Supplier City:</label>
+        <input type="text" id="supplierCity" name="supplierCity" /><br />
+
+        <label for="supplierState">Supplier State:</label>
+        <input type="text" id="supplierState" name="supplierState" /><br />
+
+        <label for="supplierZipCode">Supplier Zip Code:</label>
+        <input type="text" id="supplierZipCode" name="supplierZipCode" /><br />
+
+        <label for="supplierTelNo">Supplier Tel No:</label>
+        <input type="text" id="supplierTelNo" name="supplierTelNo" /><br />
+
+        <label for="supplierFaxNo">Supplier Fax No:</label>
+        <input type="text" id="supplierFaxNo" name="supplierFaxNo" /><br />
+
+        <label for="supplierEmail">Supplier Email Address:</label>
+        <input type="text" id="supplierEmail" name="supplierEmail" /><br />
+
+        <label for="supplierWebAddress">Supplier Web Address:</label>
+        <input
+          type="text"
+          id="supplierWebAddress"
+          name="supplierWebAddress"
+        /><br />
+
+        <label for="contactName">Contact Name:</label>
+        <input type="text" id="contactName" name="contactName" /><br />
+
+        <label for="contactTelNo">Contact Tel No:</label>
+        <input type="text" id="contactTelNo" name="contactTelNo" /><br />
+
+        <label for="contactFaxNo">Contact Fax No:</label>
+        <input type="text" id="contactFaxNo" name="contactFaxNo" /><br />
+
+        <label for="contactEmail">Contact Email Address:</label>
+        <input type="text" id="contactEmail" name="contactEmail" /><br />
+
+        <label for="paymentTerms">Payment Terms:</label>
+        <input type="text" id="paymentTerms" name="paymentTerms" /><br />
+
+        <input type="submit" value="Add Supplier" class="submitButtons" />
+      </form>
+    </section>
+
+    <script src="{{ url_for('static', filename='suppliers.js')}}"></script>
   </body>
 </html>

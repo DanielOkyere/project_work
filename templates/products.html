@@ -4,9 +4,90 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css')}}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <title>Products</title>
   </head>
   <body>
     <h1>Products</h1>
+
+    <section id="ptable">
+      <table id="productTable">
+        <tr>
+          <th>Product No.</th>
+          <th>Product Name</th>
+          <th>Serial No.</th>
+          <th>Unit Price</th>
+          <th>Quantity on Hand</th>
+          <th>Reorder Level</th>
+          <th>Reorder Quantity</th>
+          <th>Reorder Lead Time</th>
+          <th>Category No.</th>
+          <th>Actions</th>
+        </tr>
+        <tr>
+          <td>Row 1, Cell 1</td>
+          <td>Row 1, Cell 2</td>
+          <td>Row 1, Cell 3</td>
+          <td>Row 1, Cell 4</td>
+          <td>Row 1, Cell 5</td>
+          <td>Row 1, Cell 6</td>
+          <td>Row 1, Cell 7</td>
+          <td>Row 1, Cell 8</td>
+          <td>Row 1, Cell 9</td>
+          <td>
+            <button class="deleteButton" onclick="deleteRow(this)">
+              Delete
+            </button>
+          </td>
+        </tr>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section>
+      <form action="" method="" id="productForm">
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" name="productName" /><br />
+
+        <label for="serialNo">Serial No.:</label>
+        <input type="text" id="serialNo" name="serialNo" /><br />
+
+        <label for="unitPrice">Unit Price:</label>
+        <input type="number" id="unitPrice" name="unitPrice" /><br />
+
+        <label for="quantityOnHand">Quantity on Hand:</label>
+        <input type="number" id="quantityOnHand" name="quantityOnHand" /><br />
+
+        <label for="reorderLevel">Reorder Level:</label>
+        <input type="number" id="reorderLevel" name="reorderLevel" /><br />
+
+        <label for="reorderQuantity">Reorder Quantity:</label>
+        <input
+          type="number"
+          id="reorderQuantity"
+          name="reorderQuantity"
+        /><br />
+
+        <label for="reorderLeadTime">Reorder Lead Time:</label>
+        <input
+          type="number"
+          id="reorderLeadTime"
+          name="reorderLeadTime"
+        /><br />
+
+        <input type="submit" value="Add Product" class="submitButtons" />
+      </form>
+    </section>
+
+    <script src="{{ url_for('static', filename='products.js')}}"></script>
   </body>
 </html>

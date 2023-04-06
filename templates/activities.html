@@ -4,9 +4,68 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css')}}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <title>Activities</title>
   </head>
   <body>
     <h1>Activities</h1>
+
+    <section id="atable">
+      <table id="activitiesTable">
+        <tr>
+          <th>Activity ID</th>
+          <th>Activity Name</th>
+          <th>Activity Description</th>
+          <th>Activity Date</th>
+          <th>Actions</th>
+        </tr>
+        <tr>
+          <td>Row 1, Cell 1</td>
+          <td>Row 1, Cell 2</td>
+          <td>Row 1, Cell 3</td>
+          <td>Row 1, Cell 3</td>
+          <td>
+            <button class="deleteButton" onclick="deleteRow(this)">
+              Delete
+            </button>
+          </td>
+        </tr>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section>
+      <form action="" method="" id="activitiesForm">
+        <label for="activityName">Activity Name:</label>
+        <input type="text" id="activityName" name="activityName" /><br />
+
+        <label for="activityDescription">Category Description:</label>
+        <input
+          type="text"
+          id="activityDescription"
+          name="activityDescription"
+        /><br />
+
+        <label for="activityDate">Activity Date:</label>
+        <input
+          type="datetime-local"
+          id="activityDate"
+          name="activityDate"
+        /><br />
+
+        <input type="submit" value="Add Activity" class="submitButtons" />
+      </form>
+    </section>
+
+    <script src="{{ url_for('static', filename='activities.js')}}"></script>
   </body>
 </html>

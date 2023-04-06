@@ -4,9 +4,51 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css')}}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <title>Product Categories</title>
   </head>
   <body>
     <h1>Product Categories</h1>
+
+    <section id="pctable">
+      <table id="productCategoryTable">
+        <tr>
+          <th>Category No.</th>
+          <th>Category Description</th>
+          <th>Actions</th>
+        </tr>
+        <tr>
+          <td>Row 1, Cell 1</td>
+          <td>Row 1, Cell 2</td>
+          <td>Row 1, Cell 3</td>
+          <td>
+            <button class="deleteButton" onclick="deleteRow(this)">
+              Delete
+            </button>
+          </td>
+        </tr>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section>
+      <form action="" method="" id="productCategoryForm">
+        <label for="categoryDescription">Category Description:</label>
+        <input type="text" id="categoryDescription" name="categoryDesc" /><br />
+
+        <input type="submit" value="Create Category" class="submitButtons" />
+      </form>
+    </section>
+
+    <script src="{{ url_for('static', filename='productCategories.js')}}"></script>
   </body>
 </html>
