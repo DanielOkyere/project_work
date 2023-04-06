@@ -26,15 +26,13 @@ class Employee(Base):
     employeeNo = Column(Integer, primary_key=True)
     employeeName = Column(String(30))
     employeeEmail = Column(String(30))
-    purchaseOrder = relationship("PurchaseOrder", backref="employee")
-
+    purchaseOrder = Column(Integer, ForeignKey('purchaseOrder.purchaseOrderNo', name='EP_FK'), nullable=True)
 
 class ProductCategory(Base):
     """Category Declaration"""
     __tablename__ = "category"
     categoryNo = Column(Integer, primary_key=True)
     categoryDesc = Column(String(300))
-    products = relationship('Product', backref='category')
 
 
 class Product(Base):
@@ -48,8 +46,8 @@ class Product(Base):
     reorderLevel = Column(Integer)
     reorderQuantity = Column(Integer)
     reorderLeadTime = Column(DateTime)
-    categoryNo = Column(Integer, ForeignKey('category.categoryNo'), nullable=True)
-    transaction = relationship('Transaction', backref='product')
+    categoryNo = Column(Integer, ForeignKey('category.categoryNo', name='P_CATNO_FK'), nullable=True)
+    transaction = Column(Integer, ForeignKey('transaction.transactionNo', name='P_TR_FK'), nullable=True)
 
 
 class Supplier(Base):
@@ -67,9 +65,9 @@ class Supplier(Base):
     contactName = Column(String(25))
     contactTelNo = Column(String(25))
     contactFaxNo = Column(String(25))
-    contactEmalAddress = Column(String(25))
+    contactEmailAddress = Column(String(25))
     paymentTerms = Column(String(25))
-    purchaseOrder = relationship("PurchaseOrder", backref="supplier")
+    purchaseOrder = Column(Integer, ForeignKey('purchaseOrder.purchaseOrderNo', name='S_PO_FK'), nullable=True)
 
 
 class PurchaseOrder(Base):
@@ -77,28 +75,28 @@ class PurchaseOrder(Base):
     __tablename__ = "purchaseOrder"
     purchaseOrderNo = Column(Integer, primary_key=True)
     purchaseOrderDesc = Column(String(300))
-    orderDate = Column(DateTime)
-    dateRequired = Column(DateTime)
-    shippedDate = Column(DateTime)
+    orderDate = Column(DateTime, default=func.now())
+    dateRequired = Column(DateTime, default=func.now())
+    shippedDate = Column(DateTime, default=func.now())
     freightCharge = Column(Float)
-    supplierNo = Column(Integer, ForeignKey('supplier.supplierNo'))
-    employeeNo = Column(Integer, ForeignKey('employee.employeeNo'))
-    transaction = relationship('Transaction', backref='orders')
+    supplierNo = Column(Integer, ForeignKey('supplier.supplierNo', name='PO_SP_FK'), nullable=True)
+    employeeNo = Column(Integer, ForeignKey('employee.employeeNo', name='E_PO_FK'), nullable=True)
+    transaction = Column(Integer, ForeignKey('transaction.transactionNo', name='PO_T_FK'), nullable=True)
 
 
 class Transaction(Base):
     """Transaction Details"""
     __tablename__ = "transaction"
     transactionNo = Column(Integer, primary_key=True)
-    transactionDate = Column(DateTime)
+    transactionDate = Column(DateTime, default=func.now())
     transactionDescription = Column(String(300))
     unitPrice = Column(Float)
     unitsOrdered = Column(Integer)
     unitsReceived = Column(Integer)
     unitsSold = Column(Integer)
     unitsWastage = Column(Integer)
-    purchaseOrder = Column(Integer, ForeignKey('purchaseOrder.purchaseOrderNo'))
-    productNo = Column(Integer, ForeignKey('product.productNo'))
+    purchaseOrder = Column(Integer, ForeignKey('purchaseOrder.purchaseOrderNo', name='T_PO_FK'), nullable=True)
+    productNo = Column(Integer, ForeignKey('product.productNo', name='T_PRN_FK'), nullable=True)
 
 
 # Triggers
