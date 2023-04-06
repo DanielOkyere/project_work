@@ -160,11 +160,11 @@ class DB:
         print(new_transaction)
         new_t = Transaction(
             transactionDescription = new_transaction['transactionDescription'],
-    unitPrice = new_transaction['unitPrice'],
-    unitsOrdered = new_transaction['unitsOrdered'],
-    unitsReceived = new_transaction['unitsReceived'],
-    unitsSold = new_transaction['unitsSold'],
-    unitsWastage = new_transaction['unitsWastage']
+            unitPrice = new_transaction['unitPrice'],
+            unitsOrdered = new_transaction['unitsOrdered'],
+            unitsReceived = new_transaction['unitsReceived'],
+            unitsSold = new_transaction['unitsSold'],
+            unitsWastage = new_transaction['unitsWastage']
         )
         self._session.add(new_t)
         self._session.commit()

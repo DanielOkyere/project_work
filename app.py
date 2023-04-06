@@ -100,13 +100,11 @@ def product():
 
     if request.method == 'POST':
         body = request.json
-        print(body)
         products = db.add_product(
-            body
+           body_object=body
         )
         return jsonify({
             "message": "product added successfully",
-            "data": products
         })
 
 
@@ -122,7 +120,6 @@ def category_route():
            "categoryDesc": category.categoryDesc,
            "categoryNo": category.categoryNo
         } for category in categories]
-        print(results)
         return jsonify({
             "message": "catgories retrieved",
             "data": results
@@ -130,7 +127,6 @@ def category_route():
     if request.method == 'POST':
         body = request.json
         category = db.add_category(body['categoryDesc']);
-        print(category)
         return jsonify({
             "message": "Category Created",
         })
