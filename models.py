@@ -26,7 +26,6 @@ class Employee(Base):
     employeeNo = Column(Integer, primary_key=True)
     employeeName = Column(String(30))
     employeeEmail = Column(String(30))
-    purchaseOrder = Column(Integer, ForeignKey('purchaseOrder.purchaseOrderNo', name='EP_FK'), nullable=True)
 
 class ProductCategory(Base):
     """Category Declaration"""
@@ -47,7 +46,7 @@ class Product(Base):
     reorderQuantity = Column(Integer)
     reorderLeadTime = Column(DateTime)
     categoryNo = Column(Integer, ForeignKey('category.categoryNo', name='P_CATNO_FK'), nullable=True)
-    transaction = Column(Integer, ForeignKey('transaction.transactionNo', name='P_TR_FK'), nullable=True)
+    # transaction = Column(Integer, ForeignKey('transaction.transactionNo', name='P_TR_FK'), nullable=True)
 
 
 class Supplier(Base):
@@ -62,12 +61,13 @@ class Supplier(Base):
     suppTelNo = Column(String(25))
     suppFaxNo = Column(String(25))
     suppEmailAddress = Column(String(25))
+    # suppWebAddress = Column(String(25))
     contactName = Column(String(25))
     contactTelNo = Column(String(25))
     contactFaxNo = Column(String(25))
-    contactEmailAddress = Column(String(25))
+    contactEmalAddress = Column(String(25))
     paymentTerms = Column(String(25))
-    purchaseOrder = Column(Integer, ForeignKey('purchaseOrder.purchaseOrderNo', name='S_PO_FK'), nullable=True)
+    # purchaseOrder = Column(Integer, ForeignKey('purchaseOrder.purchaseOrderNo', name='S_PO_FK'), nullable=True)
 
 
 class PurchaseOrder(Base):
@@ -81,7 +81,7 @@ class PurchaseOrder(Base):
     freightCharge = Column(Float)
     supplierNo = Column(Integer, ForeignKey('supplier.supplierNo', name='PO_SP_FK'), nullable=True)
     employeeNo = Column(Integer, ForeignKey('employee.employeeNo', name='E_PO_FK'), nullable=True)
-    transaction = Column(Integer, ForeignKey('transaction.transactionNo', name='PO_T_FK'), nullable=True)
+    # transaction = Column(Integer, ForeignKey('transaction.transactionNo', name='PO_T_FK'), nullable=True)
 
 
 class Transaction(Base):

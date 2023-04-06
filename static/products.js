@@ -58,14 +58,14 @@ fetch('/product')
       const categoryNoCell = document.createElement('td');
       const actionCell = document.createElement('td');
 
-      idCell.textContent = product.id;
-      productNameCell.textContent = product.name;
+      idCell.textContent = product.productNo;
+      productNameCell.textContent = product.productName;
       serialNoCell.textContent = product.serialNo;
       unitPriceCell.textContent = product.unitPrice;
       quantityOnHandCell.textContent = product.quantityOnHand;
-      reorderLevelCell.textContent = product.reorderlevel;
+      reorderLevelCell.textContent = product.reorderLevel;
       reorderQuantityCell.textContent = product.reorderQuantity;
-      reorderLeadTimeCell.textContent = product.reorderLeadTimeCell;
+      reorderLeadTimeCell.textContent = product.reorderLeadTime;
       categoryNoCell.textContent = product.categoryNo;
       actionCell.innerHTML =
         '<button class="deleteButton" onclick="deleteRow(this)">Delete</button>';

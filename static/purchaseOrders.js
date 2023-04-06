@@ -59,12 +59,12 @@ fetch('/order')
 
       idCell.textContent = product.id;
       purchaseOrderDescriptionCell.textContent = purchaseOrder.desc;
-      orderDateCell.textContent = purchaseOrder;
-      dateRequiredCell.textContent = purchaseOrder;
-      shippedDateCell.textContent = purchaseOrder;
-      freightChargeCell.textContent = purchaseOrder;
-      supplierNoCell.textContent = purchaseOrder;
-      employeeNoCell.textContent = purchaseOrder;
+      orderDateCell.textContent = purchaseOrder.orderDate;
+      dateRequiredCell.textContent = purchaseOrder.dateRequired;
+      shippedDateCell.textContent = purchaseOrder.shippedDate;
+      freightChargeCell.textContent = purchaseOrder.freightCharge;
+      supplierNoCell.textContent = purchaseOrder.supplierNo;
+      employeeNoCell.textContent = purchaseOrder.employeeNo;
       actionCell.innerHTML =
         '<button class="deleteButton" onclick="deleteRow(this)">Delete</button>';
 

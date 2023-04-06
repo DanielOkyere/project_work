@@ -1,6 +1,3 @@
-const employees = document.getElementById('employees');
-const activities = document.getElementById('activities');
-
 const tables = document.getElementById('showTables');
 
 const showtables = document.getElementById('showTables');

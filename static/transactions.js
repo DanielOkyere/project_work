@@ -39,9 +39,9 @@ form.addEventListener('submit', function (event) {
 fetch('/transaction')
   .then((response) => response.json())
   .then((data) => {
-    let products = data.data;
-    products.forEach((product) => {
-      console.log(product);
+    let transactions = data.data;
+    transactions.forEach((transaction) => {
+      console.log(transaction);
       // const div = document.createElement('div');
       // div.innerHTML = employee.name;
       // etable.appendChild(div);
@@ -55,20 +55,21 @@ fetch('/transaction')
       const unitsReceivedCell = document.createElement('td');
       const unitsSoldCell = document.createElement('td');
       const unitsWastedCell = document.createElement('td');
-      const productNoCell = document.createElement('td');
       const purchaseOrderNoCell = document.createElement('td');
+      const productNoCell = document.createElement('td');
       const actionCell = document.createElement('td');
 
-      idCell.textContent = product.id;
-      transactionDateCell.textContent = product.name;
-      transactionDescriptionCell.textContent = product.serialNo;
-      unitPriceCell.textContent = product.unitPrice;
-      unitsOrderedCell.textContent = product.quantityOnHand;
-      unitsReceivedCell.textContent = product.reorderlevel;
-      unitsSoldCell.textContent = product.reorderQuantity;
-      unitsWastedCell.textContent = product.reorderLeadTimeCell;
-      productNoCell.textContent = product.categoryNo;
-      purchaseOrderNoCell.textContent = product.categoryNo;
+      idCell.textContent = transaction.transactionNo;
+      transactionDateCell.textContent = transaction.transactionDate;
+      transactionDescriptionCell.textContent =
+        transaction.transactionDescription;
+      unitPriceCell.textContent = transaction.unitPrice;
+      unitsOrderedCell.textContent = transaction.unitsOrdered;
+      unitsReceivedCell.textContent = transaction.unitsReceived;
+      unitsSoldCell.textContent = transaction.unitsSold;
+      unitsWastedCell.textContent = transaction.unitsWastage;
+      purchaseOrderNoCell.textContent = transaction.purchaseOrder;
+      productNoCell.textContent = transaction.productNo;
       actionCell.innerHTML =
         '<button class="deleteButton" onclick="deleteRow(this)">Delete</button>';
 
@@ -80,8 +81,8 @@ fetch('/transaction')
       row.appendChild(unitsReceivedCell);
       row.appendChild(unitsSoldCell);
       row.appendChild(unitsWastedCell);
-      row.appendChild(productNoCell);
       row.appendChild(purchaseOrderNoCell);
+      row.appendChild(productNoCell);
       row.appendChild(actionCell);
 
       transactionTable.querySelector('tbody').appendChild(row);

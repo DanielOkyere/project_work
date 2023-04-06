@@ -14,11 +14,7 @@ class DB:
 
     def __init__(self):
         """Constructor method"""
-<<<<<<< HEAD
         self._engine = create_engine("mysql+mysqlconnector://test:Pa$$word1234@localhost/project_msc")
-=======
-        self._engine = create_engine("mysql+mysqlconnector://root:password@localhost/msc_program_db")
->>>>>>> 5ad34aed42531f52ad7a25ee313d017b8cf74778
         # Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
         self.__session = None
@@ -102,32 +98,29 @@ class DB:
     def add_category(self, category_data):
         """Adds a new category"""
         new_category = ProductCategory(
-<<<<<<< HEAD
-            categoryDesc=category_data,
-=======
             categoryDesc=category_data
->>>>>>> 5ad34aed42531f52ad7a25ee313d017b8cf74778
         )
         self._session.add(new_category)
         self._session.commit()
         return new_category
 
-    def add_supplier(self, supplier_data):
+    def add_supplier(self, supplier):
         """Creates a new supplier"""
         new_supplier = Supplier(
-            supplierName = supplier_data['supplierName'],
-              supplierStreet = supplier_data['supplierStreet'],
-            supplierCity = supplier_data['supplierCity'],
-    supplierState = supplier_data['supplierState'],
-    supplierZipCode = supplier_data['supplierZipCode'],
-    suppTelNo = supplier_data['suppTelNo'],
-    suppFaxNo = supplier_data['suppFaxNo'],
-    suppEmailAddress = supplier_data['suppEmailAddress'],
-    contactName = supplier_data['contactName'],
-    contactTelNo = supplier_data['contactTelNo'],
-    contactFaxNo = supplier_data['contactFaxNo'],
-    contactEmalAddress = supplier_data['contactEmailAddress'],
-    paymentTerms = supplier_data['paymentTerms'],
+            supplierName = supplier['supplierName'],
+              supplierStreet = supplier['supplierStreet'],
+            supplierCity = supplier['supplierCity'],
+    supplierState = supplier['supplierState'],
+    supplierZipCode = supplier['supplierZipCode'],
+    suppTelNo = supplier['suppTelNo'],
+    suppFaxNo = supplier['suppFaxNo'],
+    suppEmailAddress = supplier['suppEmailAddress'],
+    # suppWebddress = supplier['suppWebAddress'],
+    contactName = supplier['contactName'],
+    contactTelNo = supplier['contactTelNo'],
+    contactFaxNo = supplier['contactFaxNo'],
+    contactEmalAddress = supplier['contactEmalAddress'],
+    paymentTerms = supplier['paymentTerms'],
         )
         self._session.add(new_supplier)
         self._session.commit()
@@ -135,8 +128,8 @@ class DB:
 
     def get_supplier(self):
         """Get suppliers"""
-        supplier_data = self._session.query(Supplier).all()
-        return supplier_data
+        supplier = self._session.query(Supplier).all()
+        return supplier
 
 
     def get_orders(self):

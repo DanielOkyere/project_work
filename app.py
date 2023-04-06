@@ -143,23 +143,24 @@ def supplier_routes():
     if request.method == 'GET':
         suppliers = db.get_supplier()
         result = [{
-            supplierName : supplier_data['supplierName'],
-            supplierStreet : supplier_data['supplierStreet'],
-            supplierCity : supplier_data['supplierCity'],
-            supplierState : supplier_data['supplierState'],
-    supplierZipCode : supplier_data['supplierZipCode'],
-    suppTelNo : supplier_data['suppTelNo'],
-    suppFaxNo : supplier_data['suppFaxNo'],
-    suppEmailAddress : supplier_data['suppEmailAddress'],
-    contactName : supplier_data['contactName'],
-    contactTelNo : supplier_data['contactTelNo'],
-    contactFaxNo : supplier_data['contactFaxNo'],
-    contactEmailAddress : supplier_data['contactEmalAddress'],
-    paymentTerms : supplier_data['paymentTerms'],
+            "supplierName" : supplier.supplierName,
+            "supplierStreet" : supplier.supplierStreet,
+            "supplierCity" : supplier.supplierCity,
+            "supplierState" : supplier.supplierState,
+            "supplierZipCode" : supplier.supplierZipCode,
+            "suppTelNo" : supplier.suppTelNo,
+            "suppFaxNo" : supplier.suppFaxNo,
+            "suppEmailAddress" : supplier.suppEmailAddress,
+            # "suppWebAddress" : supplier['suppWebAddress'],
+            "contactName" : supplier.contactName,
+            "contactTelNo" : supplier.contactTelNo,
+            "contactFaxNo" : supplier.contactFaxNo,
+            "contactEmalAddress" : supplier.contactEmalAddress,
+            "paymentTerms" : supplier.paymentTerms,
         }for supplier in suppliers]
         return jsonify({
             "message": "supplier created",
-            "data": supplier
+            "data": result
         })
 
     if request.method == 'POST':
@@ -204,20 +205,20 @@ def transact_routes():
     if request.method == 'GET':
         transactions = db.get_transactions()
         result = [{
-          "transactionNo": trans.transactionNo,
-          "transactionDate": trans.transactionDate,
-          "transactionDescription": trans.transactionDescription,
-          "unitPrice": trans.unitPrice,
-          "unitsOrdered": trans.unitsOrdered,
-          "unitsReceived": trans.unitsReceived,
-          "unitsSold": trans.unitsSold,
-          "unitsWastage": trans.unitsWastage,
-          "purchaseOrder": trans.purchaseOrder,
-          "productNo": trans.productNo
-        } for trans in transactions]
+          "transactionNo": transaction.transactionNo,
+          "transactionDate": transaction.transactionDate,
+          "transactionDescription": transaction.transactionDescription,
+          "unitPrice": transaction.unitPrice,
+          "unitsOrdered": transaction.unitsOrdered,
+          "unitsReceived": transaction.unitsReceived,
+          "unitsSold": transaction.unitsSold,
+          "unitsWastage": transaction.unitsWastage,
+          "purchaseOrder": transaction.purchaseOrder,
+          "productNo": transaction.productNo
+        } for transaction in transactions]
         return jsonify({
             "message": "transactions recieved",
-            "results": result
+            "data": result
         })
     if request.method == 'POST':
         new_transaction = request.json

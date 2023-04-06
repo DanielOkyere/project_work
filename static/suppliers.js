@@ -58,22 +58,27 @@ fetch('/supplier')
       const supplierEmailCell = document.createElement('td');
       const supplierWebAddressCell = document.createElement('td');
       const contactNameCell = document.createElement('td');
-      const contactTelNo = document.createElement('td');
-      const contactFaxNo = document.createElement('td');
-      const contactEmail = document.createElement('td');
-      const paymentTerms = document.createElement('td');
+      const contactTelNoCell = document.createElement('td');
+      const contactFaxNoCell = document.createElement('td');
+      const contactEmailCell = document.createElement('td');
+      const paymentTermsCell = document.createElement('td');
       const actionCell = document.createElement('td');
 
-      idCell.textContent = product.id;
-      transactionDateCell.textContent = product.name;
-      transactionDescriptionCell.textContent = product.serialNo;
-      unitPriceCell.textContent = product.unitPrice;
-      unitsOrderedCell.textContent = product.quantityOnHand;
-      unitsReceivedCell.textContent = product.reorderlevel;
-      unitsSoldCell.textContent = product.reorderQuantity;
-      unitsWastedCell.textContent = product.reorderLeadTimeCell;
-      productNoCell.textContent = product.categoryNo;
-      purchaseOrderNoCell.textContent = product.categoryNo;
+      idCell.textContent = supplier.id;
+      supplierNameCell.textContent = supplier.supplierName;
+      supplierStreetCell.textContent = supplier.supplierStreet;
+      supplierCityCell.textContent = supplier.supplierCity;
+      supplierStateCell.textContent = supplier.supplierState;
+      supplierZipCodeCell.textContent = supplier.supplierZipCode;
+      supplierTelNoCell.textContent = supplier.suppTelNo;
+      supplierFaxNoCell.textContent = supplier.suppFaxNo;
+      supplierEmailCell.textContent = supplier.suppEmailAddress;
+      // supplierWebAddressCell.textContent = supplier.suppWebAddress;
+      contactNameCell.textContent = supplier.contactName;
+      contactTelNoCell.textContent = supplier.contactTelNo;
+      contactFaxNoCell.textContent = supplier.contactFaxNo;
+      contactEmailCell.textContent = supplier.contactEmalAddress;
+      paymentTermsCell.textContent = supplier.paymentTerms;
       actionCell.innerHTML =
         '<button class="deleteButton" onclick="deleteRow(this)">Delete</button>';
 
@@ -86,12 +91,12 @@ fetch('/supplier')
       row.appendChild(supplierTelNoCell);
       row.appendChild(supplierFaxNoCell);
       row.appendChild(supplierEmailCell);
-      row.appendChild(supplierWebAddressCell);
+      // row.appendChild(supplierWebAddressCell);
       row.appendChild(contactNameCell);
-      row.appendChild(contactTelNo);
-      row.appendChild(contactFaxNo);
-      row.appendChild(contactEmail);
-      row.appendChild(paymentTerms);
+      row.appendChild(contactTelNoCell);
+      row.appendChild(contactFaxNoCell);
+      row.appendChild(contactEmailCell);
+      row.appendChild(paymentTermsCell);
       row.appendChild(actionCell);
 
       supplierTable.querySelector('tbody').appendChild(row);
