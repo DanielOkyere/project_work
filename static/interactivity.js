@@ -43,11 +43,9 @@ transactions.addEventListener('click', () => {
 employees.addEventListener('click', () => {
   loadHTMLPage('/employees');
 });
-activities.addEventListener('click', () => {
-  loadHTMLPage('/activities');
-});
-
-// functions
+// activities.addEventListener('click', () => {
+//   loadHTMLPage('/activities');
+// });
 dashboard.addEventListener('click', () => {
   loadHTMLPage('/dashboard');
 });
@@ -67,6 +65,7 @@ transactions.addEventListener('click', () => {
   loadHTMLPage('/transactions');
 });
 
+// functions
 function loadHTMLPage(url) {
   iframe.src = url;
 }

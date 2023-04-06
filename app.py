@@ -188,8 +188,8 @@ def order_routes():
         })
 
     if request.method == 'POST':
-        body = request.json
-        new_order = db.add_orders(body)
+        new_order = request.json
+        result = db.add_orders(new_order)
         return jsonify({
             "message": "created New order",
         })

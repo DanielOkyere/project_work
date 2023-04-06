@@ -57,8 +57,9 @@ fetch('/order')
       const employeeNoCell = document.createElement('td');
       const actionCell = document.createElement('td');
 
-      idCell.textContent = product.id;
-      purchaseOrderDescriptionCell.textContent = purchaseOrder.desc;
+      idCell.textContent = purchaseOrder.purchaseOrderNo;
+      purchaseOrderDescriptionCell.textContent =
+        purchaseOrder.purchaseOrderDesc;
       orderDateCell.textContent = purchaseOrder.orderDate;
       dateRequiredCell.textContent = purchaseOrder.dateRequired;
       shippedDateCell.textContent = purchaseOrder.shippedDate;

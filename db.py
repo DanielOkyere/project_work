@@ -148,7 +148,7 @@ class DB:
             freightCharge = new_order['freightCharge'],
             supplierNo = new_order['supplierNo'],
             employeeNo = new_order['employeeNo'],
-            transaction = new_order['transaction'],
+            # transaction = new_order['transaction'],
             )
         self._session.add(new_order_data)
         self._session.commit()
