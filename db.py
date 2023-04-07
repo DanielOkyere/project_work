@@ -14,7 +14,7 @@ class DB:
 
     def __init__(self):
         """Constructor method"""
-        self._engine = create_engine("mysql+mysqlconnector://test:Pa$$word1234@localhost/project_msc")
+        self._engine = create_engine("mysql+mysqlconnector://root:password@localhost/project_msc")
         # Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
         self.__session = None
@@ -58,16 +58,22 @@ class DB:
 
     def update_employee(self, employee_id, **kwargs):
         """Updates an employee"""
-        employee = self.find_employee_by(id=employee_id)
+        employee = self.find_employee_by(employeeNo=employee_id)
         column_names = Employee.__table__.columns.keys()
         for key in kwargs.keys():
             if key not in column_names:
                 raise ValueError
 
         for k, v in kwargs.items():
-            setattr(employee, k, v)
-
+            setattr(Employee, k, v)
         self._session.commit()
+        
+    def delete_employee(self, employee_id):
+        """Deletes an employee"""
+        employee = self._session.query(Employee).filter_by(employeeNo=employee_id).delete()
+        self._session.commit()
+        return employee
+        
 
     def get_product(self):
         """Fetches products from database"""
@@ -89,11 +95,52 @@ class DB:
         self._session.commit()
 
         return new_product
+    
+    def find_product(self, **kwargs):
+        """Fetches product"""
+        if not kwargs:
+            raise InvalidRequestError
+        column_name = Product.__table__.columns.keys()
+        for key in kwargs.keys():
+            if key not in column_name:
+                raise InvalidRequestError
+            
+        product = self._session.query(Product).filter_by(**kwargs).first()
+        if product is None:
+            raise NoResultFound
+        
+        return product
+        
+        
+    def update_product(self, product_id, **kwargs):
+        """Adds new product"""
+        product = self.find_product(id=product_id)
+        column_name = Product.__table__.columns.keys()
+        for key in kwargs.keys():
+            if key not in column_names:
+                raise ValueError
+            
+        for k, v in kwargs.items():
+            setattr(product, k, v)
+            
+        self._session.commit()
+        
+    def delete_product(self, product_id):
+        product = self._session.query(Product).filter_by(productNo=product_id).delete()
+        self._session.commit()
+        return product
+        
 
     def get_categories(self):
         """Gets product"""
         categories = self._session.query(ProductCategory).all()
         return categories
+    
+    def delete_categories(self, category_id):
+        categories = self._session.query(ProductCategory).filter_by(categoryNo=category_id).delete()
+        self._session.commit()
+        return categories
+    
 
     def add_category(self, category_data):
         """Adds a new category"""
@@ -110,17 +157,17 @@ class DB:
             supplierName = supplier['supplierName'],
               supplierStreet = supplier['supplierStreet'],
             supplierCity = supplier['supplierCity'],
-    supplierState = supplier['supplierState'],
-    supplierZipCode = supplier['supplierZipCode'],
-    suppTelNo = supplier['suppTelNo'],
-    suppFaxNo = supplier['suppFaxNo'],
-    suppEmailAddress = supplier['suppEmailAddress'],
-    # suppWebddress = supplier['suppWebAddress'],
-    contactName = supplier['contactName'],
-    contactTelNo = supplier['contactTelNo'],
-    contactFaxNo = supplier['contactFaxNo'],
-    contactEmalAddress = supplier['contactEmalAddress'],
-    paymentTerms = supplier['paymentTerms'],
+            supplierState = supplier['supplierState'],
+            supplierZipCode = supplier['supplierZipCode'],
+            suppTelNo = supplier['suppTelNo'],
+            suppFaxNo = supplier['suppFaxNo'],
+            suppEmailAddress = supplier['suppEmailAddress'],
+            # suppWebddress = supplier['suppWebAddress'],
+            contactName = supplier['contactName'],
+            contactTelNo = supplier['contactTelNo'],
+            contactFaxNo = supplier['contactFaxNo'],
+            contactEmalAddress = supplier['contactEmalAddress'],
+            paymentTerms = supplier['paymentTerms'],
         )
         self._session.add(new_supplier)
         self._session.commit()
@@ -129,6 +176,11 @@ class DB:
     def get_supplier(self):
         """Get suppliers"""
         supplier = self._session.query(Supplier).all()
+        return supplier
+    
+    def delete_supplier(self, supplierId):
+        supplier = self._session.query(Supplier).filter_by(supplierNo=supplierId).delete()
+        self._session.commit()
         return supplier
 
 
@@ -155,6 +207,11 @@ class DB:
 
         return new_order_data
 
+    def delete_order(self, order_id):
+        orders = self._session.query(PurchaseOrder).filter_by({purchaseOrderNo:order_id}).delete()
+        self._session.commit()
+        return orders
+        
     def add_transactions(self, new_transaction):
         """Creates a new transaction"""
         print(new_transaction)

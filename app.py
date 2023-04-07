@@ -70,16 +70,34 @@ def employee():
         employees = db.get_employee()
         data = [{"name": employee.employeeName, "employeeNo": employee.employeeNo, "email": employee.employeeEmail} for employee in employees]
         return jsonify({"message": "employees Retrieved", "data": data})
-    elif request.method == 'POST':
+    if request.method == 'POST':
         new_employees = request.json
-        print(new_employees)
         db.add_employee(employeeName=new_employees.get('name'),
                         employeeEmail=new_employees.get('email'))
         return jsonify(new_employees)
+    
+    if request.method == 'PUT':
+        body = request.json
+        data = db.update_employee(
+            employee_id=body['employeeNo'], 
+            employeeEmail=body['employeeEmail'], 
+            employeeName=['employeeName']
+            )
+        return jsonify({
+            "message": "successful update",
+        })
+        
+    if request.method == 'DELETE':
+        """Delete routes"""
+        body = request.json
+        data = db.delete_employee(employee_id=body['employeeNo'])
+        return jsonify({
+            "message" : "deleted employee {}".format(body['employeeNo'])
+        })
 
 
 # Product Routes
-@app.route('/product', methods=['GET', 'POST'])
+@app.route('/product', methods=['GET', 'POST', 'DELETE'])
 def product():
     """Product Endpoint"""
     if request.method == 'GET':
@@ -107,10 +125,16 @@ def product():
             "message": "product added successfully",
         })
 
+    if request.method == 'DELETE':
+        body = request.json
+        result = db.delete_product(product_id=body['productNo'])
+        return jsonify({
+            "message": "deleted {}".format(body['productNo'])
+        })
 
 # Category Routes
 @app.route('/category',
-           methods=['GET', 'POST', 'PUT']
+           methods=['GET', 'POST', 'PUT', 'DELETE']
            )
 def category_route():
     """Category routes"""
@@ -129,6 +153,13 @@ def category_route():
         category = db.add_category(body['categoryDesc']);
         return jsonify({
             "message": "Category Created",
+        })
+        
+    if request.method == 'DELETE':
+        body = request.json
+        category = db.delete_categories(category_id=body['purchaseOrderNo'])
+        return jsonify({
+            "message": "deleted {}".format(body['purchaseOrderNo'])
         })
 
 
@@ -166,6 +197,12 @@ def supplier_routes():
             "message": "new supplier",
         })
 
+    if request.method == 'DELETE':
+        body = request.json
+        supplier = db.delete_supplier(supplierId=body['supplierId'])
+        return jsonify({
+            "message": "deleted supplier {}".format(body['supplierId'])
+        })
 # Purchase Order Routes
 @app.route('/order', methods=['GET','POST'])
 def order_routes():
