@@ -16,7 +16,7 @@
     />
     <title>Suppliers</title>
   </head>
-  <body>
+  <body class="frameView">
     <h1>Suppliers</h1>
 
     <section id="stable">
@@ -37,29 +37,7 @@
           <th>Contact Fax No.</th>
           <th>Contact Email Address</th>
           <th>Payment Terms</th>
-          <th>Actions</th>
-        </tr>
-        <tr>
-          <td>Row 1, Cell 1</td>
-          <td>Row 1, Cell 2</td>
-          <td>Row 1, Cell 3</td>
-          <td>Row 1, Cell 4</td>
-          <td>Row 1, Cell 5</td>
-          <td>Row 1, Cell 6</td>
-          <td>Row 1, Cell 7</td>
-          <td>Row 1, Cell 8</td>
-          <td>Row 1, Cell 9</td>
-          <!-- <td>Row 1, Cell 10</td> -->
-          <td>Row 1, Cell 11</td>
-          <td>Row 1, Cell 12</td>
-          <td>Row 1, Cell 13</td>
-          <td>Row 1, Cell 14</td>
-          <td>Row 1, Cell 15</td>
-          <td>
-            <button class="deleteButton" onclick="deleteRow(this)">
-              Delete
-            </button>
-          </td>
+          <th colspan="2">Actions</th>
         </tr>
         <tbody></tbody>
       </table>
@@ -67,6 +45,8 @@
 
     <section>
       <form action="" method="" id="supplierForm">
+        <h2>Add New Supplier Form</h2>
+
         <label for="supplierName">Supplier Name:</label>
         <input type="text" id="supplierName" name="supplierName" /><br />
 

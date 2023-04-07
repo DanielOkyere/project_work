@@ -28,6 +28,7 @@ form.addEventListener('submit', function (event) {
         console.log(xhr.responseText);
         form.reset();
         alert('successfully added');
+        window.location.reload();
       } else {
         console.error(xhr.status);
       }
@@ -50,16 +51,20 @@ fetch('/category')
       const row = document.createElement('tr');
       const idCell = document.createElement('td');
       const categoryDescriptionCell = document.createElement('td');
-      const actionCell = document.createElement('td');
+      const deleteCell = document.createElement('td');
+      const updateCell = document.createElement('td');
 
       idCell.textContent = productCategory.categoryNo;
       categoryDescriptionCell.textContent = productCategory.categoryDesc;
-      actionCell.innerHTML =
-        '<button class="deleteButton" onclick="deleteRow(this)">Delete</button>';
+      deleteCell.innerHTML =
+        '<button class="deletebutton" onclick="deleteRow(this)">Delete</button>';
+      updateCell.innerHTML =
+        '<button class="updatebutton" onclick="">Update</button>';
 
       row.appendChild(idCell);
       row.appendChild(categoryDescriptionCell);
-      row.appendChild(actionCell);
+      row.appendChild(updateCell);
+      row.appendChild(deleteCell);
 
       productCategoryTable.querySelector('tbody').appendChild(row);
     });

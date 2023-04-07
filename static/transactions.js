@@ -27,6 +27,8 @@ form.addEventListener('submit', function (event) {
       if (xhr.status === 200) {
         console.log(xhr.responseText);
         form.reset();
+        alert('successfully added');
+        window.location.reload();
       } else {
         console.error(xhr.status);
       }
@@ -57,7 +59,8 @@ fetch('/transaction')
       const unitsWastedCell = document.createElement('td');
       const purchaseOrderNoCell = document.createElement('td');
       const productNoCell = document.createElement('td');
-      const actionCell = document.createElement('td');
+      const deleteCell = document.createElement('td');
+      const updateCell = document.createElement('td');
 
       idCell.textContent = transaction.transactionNo;
       transactionDateCell.textContent = transaction.transactionDate;
@@ -70,8 +73,10 @@ fetch('/transaction')
       unitsWastedCell.textContent = transaction.unitsWastage;
       purchaseOrderNoCell.textContent = transaction.purchaseOrder;
       productNoCell.textContent = transaction.productNo;
-      actionCell.innerHTML =
-        '<button class="deleteButton" onclick="deleteRow(this)">Delete</button>';
+      deleteCell.innerHTML =
+        '<button class="deletebutton" onclick="deleteRow(this)">Delete</button>';
+      updateCell.innerHTML =
+        '<button class="updatebutton" onclick="">Update</button>';
 
       row.appendChild(idCell);
       row.appendChild(transactionDateCell);
@@ -83,7 +88,8 @@ fetch('/transaction')
       row.appendChild(unitsWastedCell);
       row.appendChild(purchaseOrderNoCell);
       row.appendChild(productNoCell);
-      row.appendChild(actionCell);
+      row.appendChild(updateCell);
+      row.appendChild(deleteCell);
 
       transactionTable.querySelector('tbody').appendChild(row);
     });

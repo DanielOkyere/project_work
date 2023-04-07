@@ -18,6 +18,22 @@ body {
   line-height: 1.5;
 }
 
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  background: rgb(88, 136, 232);
+}
+
+nav h1 {
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+}
+
 .container {
   display: flex;
 }
@@ -25,7 +41,17 @@ body {
 #sidebar {
   width: 15vw;
   height: 100vh;
-  background: blue;
+  background: rgb(88, 136, 232);
+  text-align: center;
+  border: 8px solid #d3d3d3;
+}
+
+#sidebar ul li {
+  margin: 0 auto;
+}
+
+#sidebar button {
+  margin: 10px auto;
 }
 
 #mainArea {
@@ -34,21 +60,74 @@ body {
   background: rgba(255, 253, 208, 0.3);
 }
 
+.frameView {
+  margin: 0 auto;
+  text-align: center;
+}
+
 #buttonDropDown {
   display: flex;
   flex-direction: column;
+}
+
+/* tables */
+table {
+  margin: 0 auto;
+  border: 1px solid black;
+}
+
+th,
+td {
+  border: 1px solid black;
+  text-align: center;
+  padding: 10px 5px;
+}
+
+/* forms */
+form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 100px auto 100px auto;
+  background: #f0f8ff;
+  padding: 20px 0;
+}
+
+input {
+  height: 30px;
+  width: 400px;
+  margin: auto;
+}
+
+label {
+  margin: auto;
+}
+
+form h2 {
+  margin: 10px 0;
 }
 
 /* utilities */
 button,
 .submitButtons {
   padding: 15px;
-  margin: 10px;
+  margin: auto;
   font-size: 15px;
+  font-weight: bold;
   border-radius: 5px;
+  text-transform: uppercase;
 }
 
-button:hover {
+button:hover,
+.submitButtons:hover {
   opacity: 0.8;
   background: green;
+  color: white;
+}
+
+.deletebutton:hover {
+  background: red;
+}
+
+sidebar button {
 }

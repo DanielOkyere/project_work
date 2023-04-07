@@ -27,6 +27,8 @@ form.addEventListener('submit', function (event) {
       if (xhr.status === 200) {
         console.log(xhr.responseText);
         form.reset();
+        alert('successfully added');
+        window.location.reload();
       } else {
         console.error(xhr.status);
       }
@@ -56,7 +58,8 @@ fetch('/product')
       const reorderQuantityCell = document.createElement('td');
       const reorderLeadTimeCell = document.createElement('td');
       const categoryNoCell = document.createElement('td');
-      const actionCell = document.createElement('td');
+      const deleteCell = document.createElement('td');
+      const updateCell = document.createElement('td');
 
       idCell.textContent = product.productNo;
       productNameCell.textContent = product.productName;
@@ -67,8 +70,10 @@ fetch('/product')
       reorderQuantityCell.textContent = product.reorderQuantity;
       reorderLeadTimeCell.textContent = product.reorderLeadTime;
       categoryNoCell.textContent = product.categoryNo;
-      actionCell.innerHTML =
-        '<button class="deleteButton" onclick="deleteRow(this)">Delete</button>';
+      deleteCell.innerHTML =
+        '<button class="deletebutton" onclick="deleteRow(this)">Delete</button>';
+      updateCell.innerHTML =
+        '<button class="updatebutton" onclick="">Update</button>';
 
       row.appendChild(idCell);
       row.appendChild(productNameCell);
@@ -79,7 +84,8 @@ fetch('/product')
       row.appendChild(reorderQuantityCell);
       row.appendChild(reorderLeadTimeCell);
       row.appendChild(categoryNoCell);
-      row.appendChild(actionCell);
+      row.appendChild(updateCell);
+      row.appendChild(deleteCell);
 
       productTable.querySelector('tbody').appendChild(row);
     });

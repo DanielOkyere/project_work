@@ -16,7 +16,7 @@
     />
     <title>Product Categories</title>
   </head>
-  <body>
+  <body class="frameView">
     <h1>Product Categories</h1>
 
     <section id="pctable">
@@ -24,17 +24,7 @@
         <tr>
           <th>Category No.</th>
           <th>Category Description</th>
-          <th>Actions</th>
-        </tr>
-        <tr>
-          <td>Row 1, Cell 1</td>
-          <td>Row 1, Cell 2</td>
-          <td>Row 1, Cell 3</td>
-          <td>
-            <button class="deleteButton" onclick="deleteRow(this)">
-              Delete
-            </button>
-          </td>
+          <th colspan="2">Actions</th>
         </tr>
         <tbody></tbody>
       </table>
@@ -42,6 +32,8 @@
 
     <section>
       <form action="" method="" id="productCategoryForm">
+        <h2>Add New Product Category Form</h2>
+
         <label for="categoryDescription">Category Description:</label>
         <input type="text" id="categoryDescription" name="categoryDesc" /><br />
 

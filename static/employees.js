@@ -2,23 +2,6 @@ const addEmployee = document.getElementById('addEmployee');
 const employeetable = document.getElementById('employeetable');
 const etable = document.getElementById('etable');
 
-addEmployee.addEventListener('click', () => {
-  addRow();
-});
-
-function addRow() {
-  var row = employeetable.insertRow(-1);
-  var nameCell = row.insertCell(0);
-  var ageCell = row.insertCell(1);
-  var cityCell = row.insertCell(2);
-  var actionCell = row.insertCell(3);
-  nameCell.innerHTML = 'Bob';
-  ageCell.innerHTML = '35';
-  cityCell.innerHTML = 'Chicago';
-  actionCell.innerHTML =
-    '<button class="deleteButton" onclick="deleteRow(this)">Delete</button>';
-}
-
 function deleteRow(btn) {
   var row = btn.parentNode.parentNode;
   row.parentNode.removeChild(row);
@@ -45,6 +28,8 @@ form.addEventListener('submit', function (event) {
       if (xhr.status === 200) {
         // console.log(xhr.responseText);
         form.reset();
+        alert('successfully added');
+        window.location.reload();
       } else {
         console.error(xhr.status);
       }
@@ -68,18 +53,22 @@ fetch('/employee')
       const idCell = document.createElement('td');
       const nameCell = document.createElement('td');
       const emailCell = document.createElement('td');
-      const actionCell = document.createElement('td');
+      const deleteCell = document.createElement('td');
+      const updateCell = document.createElement('td');
 
       idCell.textContent = employee.employeeNo;
       nameCell.textContent = employee.name;
       emailCell.textContent = employee.email;
-      actionCell.innerHTML =
-        '<button class="deleteButton" onclick="deleteRow(this)">Delete</button>';
+      deleteCell.innerHTML =
+        '<button class="deletebutton" onclick="deleteRow(this)">Delete</button>';
+      updateCell.innerHTML =
+        '<button class="updatebutton" onclick="">Update</button>';
 
       row.appendChild(idCell);
       row.appendChild(nameCell);
       row.appendChild(emailCell);
-      row.appendChild(actionCell);
+      row.appendChild(updateCell);
+      row.appendChild(deleteCell);
 
       employeetable.querySelector('tbody').appendChild(row);
     });

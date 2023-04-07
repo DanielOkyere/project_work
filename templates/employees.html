@@ -16,10 +16,8 @@
     />
     <title>Employees</title>
   </head>
-  <body>
+  <body class="frameView">
     <h1>Employees</h1>
-
-    <button id="addEmployee">Add Employee</button>
 
     <section id="etable">
       <table id="employeetable">
@@ -27,7 +25,7 @@
           <th>Employee Number</th>
           <th>Employee Name</th>
           <th>Email</th>
-          <th>Actions</th>
+          <th colspan="2">Actions</th>
         </tr>
         <!-- <tr>
           <td>Row 1, Cell 1</td>
@@ -45,6 +43,8 @@
 
     <section>
       <form action="" method="" id="employeeForm">
+        <h2>Add New Employee Form</h2>
+
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" /><br />
 

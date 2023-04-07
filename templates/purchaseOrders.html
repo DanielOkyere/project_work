@@ -16,7 +16,7 @@
     />
     <title>Purchase Orders</title>
   </head>
-  <body>
+  <body class="frameView">
     <h1>Purchase Orders</h1>
 
     <section id="pctable">
@@ -30,22 +30,7 @@
           <th>Freight Charge</th>
           <th>Supplier No</th>
           <th>Employee No</th>
-          <th>Actions</th>
-        </tr>
-        <tr>
-          <td>Row 1, Cell 1</td>
-          <td>Row 1, Cell 2</td>
-          <td>Row 1, Cell 3</td>
-          <td>Row 1, Cell 4</td>
-          <td>Row 1, Cell 5</td>
-          <td>Row 1, Cell 6</td>
-          <td>Row 1, Cell 7</td>
-          <td>Row 1, Cell 8</td>
-          <td>
-            <button class="deleteButton" onclick="deleteRow(this)">
-              Delete
-            </button>
-          </td>
+          <th colspan="2">Actions</th>
         </tr>
         <tbody></tbody>
       </table>
@@ -53,6 +38,8 @@
 
     <section>
       <form action="" method="" id="purchaseOrderForm">
+        <h2>Add New Purchase Order Form</h2>
+
         <label for="purchaseOrderDesc">Purchase OrderDescription:</label>
         <input
           type="text"

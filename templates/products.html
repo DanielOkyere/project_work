@@ -16,7 +16,7 @@
     />
     <title>Products</title>
   </head>
-  <body>
+  <body class="frameView">
     <h1>Products</h1>
 
     <section id="ptable">
@@ -31,23 +31,7 @@
           <th>Reorder Quantity</th>
           <th>Reorder Lead Time</th>
           <th>Category No.</th>
-          <th>Actions</th>
-        </tr>
-        <tr>
-          <td>Row 1, Cell 1</td>
-          <td>Row 1, Cell 2</td>
-          <td>Row 1, Cell 3</td>
-          <td>Row 1, Cell 4</td>
-          <td>Row 1, Cell 5</td>
-          <td>Row 1, Cell 6</td>
-          <td>Row 1, Cell 7</td>
-          <td>Row 1, Cell 8</td>
-          <td>Row 1, Cell 9</td>
-          <td>
-            <button class="deleteButton" onclick="deleteRow(this)">
-              Delete
-            </button>
-          </td>
+          <th colspan="2">Actions</th>
         </tr>
         <tbody></tbody>
       </table>
@@ -55,6 +39,8 @@
 
     <section>
       <form action="" method="" id="productForm">
+        <h2>Add New Product Form</h2>
+
         <label for="productName">Product Name:</label>
         <input type="text" id="productName" name="productName" /><br />
 

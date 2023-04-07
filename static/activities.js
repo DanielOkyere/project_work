@@ -28,6 +28,7 @@ form.addEventListener('submit', function (event) {
         console.log(xhr.responseText);
         form.reset();
         alert('successfully added');
+        window.location.reload();
       } else {
         console.error(xhr.status);
       }
@@ -52,20 +53,24 @@ fetch('/activity')
       const activityNameCell = document.createElement('td');
       const activityDescriptionCell = document.createElement('td');
       const activityDateCell = document.createElement('td');
-      const actionCell = document.createElement('td');
+      const deleteCell = document.createElement('td');
+      const updateCell = document.createElement('td');
 
       idCell.textContent = activity.idNo;
       activityNameCell.textContent = activity.name;
       activityDescriptionCell.textContent = activity.description;
       activityDateCell.textContent = activity.date;
-      actionCell.innerHTML =
-        '<button class="deleteButton" onclick="deleteRow(this)">Delete</button>';
+      deleteCell.innerHTML =
+        '<button class="deletebutton" onclick="deleteRow(this)">Delete</button>';
+      updateCell.innerHTML =
+        '<button class="updatebutton" onclick="">Update</button>';
 
       row.appendChild(idCell);
       row.appendChild(activityNameCell);
       row.appendChild(activityDescriptionCell);
       row.appendChild(activityDateCell);
-      row.appendChild(actionCell);
+      row.appendChild(updateCell);
+      row.appendChild(deleteCell);
 
       activitiesTable.querySelector('tbody').appendChild(row);
     });

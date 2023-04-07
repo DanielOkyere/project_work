@@ -16,7 +16,7 @@
     />
     <title>Transactions</title>
   </head>
-  <body>
+  <body class="frameView">
     <h1>Transactions</h1>
 
     <section id="ttable">
@@ -32,24 +32,7 @@
           <th>Units Wasted</th>
           <th>Product No.</th>
           <th>Purchase Order No.</th>
-          <th>Actions</th>
-        </tr>
-        <tr>
-          <td>Row 1, Cell 1</td>
-          <td>Row 1, Cell 2</td>
-          <td>Row 1, Cell 3</td>
-          <td>Row 1, Cell 4</td>
-          <td>Row 1, Cell 5</td>
-          <td>Row 1, Cell 6</td>
-          <td>Row 1, Cell 7</td>
-          <td>Row 1, Cell 8</td>
-          <td>Row 1, Cell 9</td>
-          <td>Row 1, Cell 10</td>
-          <td>
-            <button class="deleteButton" onclick="deleteRow(this)">
-              Delete
-            </button>
-          </td>
+          <th colspan="2">Actions</th>
         </tr>
         <tbody></tbody>
       </table>
@@ -57,6 +40,8 @@
 
     <section>
       <form action="" method="" id="transactionForm">
+        <h2>Add New Transaction Form</h2>
+
         <label for="transactionDate">Transaction Date:</label>
         <input
           type="datetime-local"

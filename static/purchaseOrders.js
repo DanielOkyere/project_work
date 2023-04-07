@@ -27,6 +27,8 @@ form.addEventListener('submit', function (event) {
       if (xhr.status === 200) {
         console.log(xhr.responseText);
         form.reset();
+        alert('successfully added');
+        window.location.reload();
       } else {
         console.error(xhr.status);
       }
@@ -55,7 +57,8 @@ fetch('/order')
       const freightChargeCell = document.createElement('td');
       const supplierNoCell = document.createElement('td');
       const employeeNoCell = document.createElement('td');
-      const actionCell = document.createElement('td');
+      const deleteCell = document.createElement('td');
+      const updateCell = document.createElement('td');
 
       idCell.textContent = purchaseOrder.purchaseOrderNo;
       purchaseOrderDescriptionCell.textContent =
@@ -66,8 +69,10 @@ fetch('/order')
       freightChargeCell.textContent = purchaseOrder.freightCharge;
       supplierNoCell.textContent = purchaseOrder.supplierNo;
       employeeNoCell.textContent = purchaseOrder.employeeNo;
-      actionCell.innerHTML =
-        '<button class="deleteButton" onclick="deleteRow(this)">Delete</button>';
+      deleteCell.innerHTML =
+        '<button class="deletebutton" onclick="deleteRow(this)">Delete</button>';
+      updateCell.innerHTML =
+        '<button class="updatebutton" onclick="">Update</button>';
 
       row.appendChild(idCell);
       row.appendChild(purchaseOrderDescriptionCell);
@@ -77,7 +82,8 @@ fetch('/order')
       row.appendChild(freightChargeCell);
       row.appendChild(supplierNoCell);
       row.appendChild(employeeNoCell);
-      row.appendChild(actionCell);
+      row.appendChild(updateCell);
+      row.appendChild(deleteCell);
 
       purchaseOrderTable.querySelector('tbody').appendChild(row);
     });

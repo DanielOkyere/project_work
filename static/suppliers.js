@@ -27,6 +27,8 @@ form.addEventListener('submit', function (event) {
       if (xhr.status === 200) {
         console.log(xhr.responseText);
         form.reset();
+        alert('successfully added');
+        window.location.reload();
       } else {
         console.error(xhr.status);
       }
@@ -62,7 +64,8 @@ fetch('/supplier')
       const contactFaxNoCell = document.createElement('td');
       const contactEmailCell = document.createElement('td');
       const paymentTermsCell = document.createElement('td');
-      const actionCell = document.createElement('td');
+      const deleteCell = document.createElement('td');
+      const updateCell = document.createElement('td');
 
       idCell.textContent = supplier.id;
       supplierNameCell.textContent = supplier.supplierName;
@@ -79,8 +82,10 @@ fetch('/supplier')
       contactFaxNoCell.textContent = supplier.contactFaxNo;
       contactEmailCell.textContent = supplier.contactEmalAddress;
       paymentTermsCell.textContent = supplier.paymentTerms;
-      actionCell.innerHTML =
-        '<button class="deleteButton" onclick="deleteRow(this)">Delete</button>';
+      deleteCell.innerHTML =
+        '<button class="deletebutton" onclick="deleteRow(this)">Delete</button>';
+      updateCell.innerHTML =
+        '<button class="updatebutton" onclick="">Update</button>';
 
       row.appendChild(idCell);
       row.appendChild(supplierNameCell);
@@ -97,7 +102,8 @@ fetch('/supplier')
       row.appendChild(contactFaxNoCell);
       row.appendChild(contactEmailCell);
       row.appendChild(paymentTermsCell);
-      row.appendChild(actionCell);
+      row.appendChild(updateCell);
+      row.appendChild(deleteCell);
 
       supplierTable.querySelector('tbody').appendChild(row);
     });
