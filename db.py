@@ -14,7 +14,7 @@ class DB:
 
     def __init__(self):
         """Constructor method"""
-        self._engine = create_engine("mysql+mysqlconnector://root:password@localhost/project_msc")
+        self._engine = create_engine("mysql+mysqlconnector://test:Pa$$word1234@localhost/project_msc")
         # Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
         self.__session = None
@@ -208,7 +208,7 @@ class DB:
         return new_order_data
 
     def delete_order(self, order_id):
-        orders = self._session.query(PurchaseOrder).filter_by({purchaseOrderNo:order_id}).delete()
+        orders = self._session.query(PurchaseOrder).filter_by(purchaseOrderNo=order_id).delete()
         self._session.commit()
         return orders
         
@@ -231,3 +231,8 @@ class DB:
         """Get transactions"""
         transactions = self._session.query(Transaction).all()
         return transactions
+    
+    def delete_transaction(self, transaction_id):
+        transaction = self._session.query(Transaction).filter_by(transactionNo=transaction_id).delete()
+        self._session.commit()
+        return transaction

@@ -1,9 +1,28 @@
 const productCategoryTable = document.getElementById('productCategoryTable');
 const pctable = document.getElementById('pctable');
 
-function deleteRow(btn) {
-  var row = btn.parentNode.parentNode;
-  row.parentNode.removeChild(row);
+function deleteRow(categoryNo) {
+  var ID = categoryNo.getAttribute('data-id');
+  console.log(ID);
+  if (confirm('Are you sure you want to delete this entry?')) {
+    // this.submit();
+    // row.parentNode.removeChild(row);
+    var xhr = new XMLHttpRequest();
+    xhr.open('DELETE', '/category', true);
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var response = JSON.parse(xhr.responseText);
+        if (response.success) {
+          alert('Failed to delete entry.');
+        } else {
+          alert('successfully deleted');
+          window.location.reload();
+        }
+      }
+    };
+    xhr.send(JSON.stringify({ categoryNo: ID }));
+  }
 }
 
 const form = document.getElementById('productCategoryForm');
@@ -57,7 +76,9 @@ fetch('/category')
       idCell.textContent = productCategory.categoryNo;
       categoryDescriptionCell.textContent = productCategory.categoryDesc;
       deleteCell.innerHTML =
-        '<button class="deletebutton" onclick="deleteRow(this)">Delete</button>';
+        '<button class="deletebutton" onclick="deleteRow(this)" data-ID="' +
+        productCategory.categoryNo +
+        '">Delete</button>';
       updateCell.innerHTML =
         '<button class="updatebutton" onclick="">Update</button>';
 

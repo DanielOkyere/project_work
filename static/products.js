@@ -1,9 +1,28 @@
 const productTable = document.getElementById('productTable');
 const ptable = document.getElementById('ptable');
 
-function deleteRow(btn) {
-  var row = btn.parentNode.parentNode;
-  row.parentNode.removeChild(row);
+function deleteRow(product) {
+  var ID = product.getAttribute('data-id');
+  console.log(ID);
+  if (confirm('Are you sure you want to delete this entry?')) {
+    // this.submit();
+    // row.parentNode.removeChild(row);
+    var xhr = new XMLHttpRequest();
+    xhr.open('DELETE', '/product', true);
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var response = JSON.parse(xhr.responseText);
+        if (response.success) {
+          alert('Failed to delete entry.');
+        } else {
+          alert('successfully deleted');
+          window.location.reload();
+        }
+      }
+    };
+    xhr.send(JSON.stringify({ productNo: ID }));
+  }
 }
 
 const form = document.getElementById('productForm');
@@ -61,8 +80,8 @@ fetch('/product')
       const deleteCell = document.createElement('td');
       const updateCell = document.createElement('td');
 
-      idCell.textContent = product.productNo;
-      productNameCell.textContent = product.productName;
+      idCell.textContent = product.id;
+      productNameCell.textContent = product.name;
       serialNoCell.textContent = product.serialNo;
       unitPriceCell.textContent = product.unitPrice;
       quantityOnHandCell.textContent = product.quantityOnHand;
@@ -71,7 +90,9 @@ fetch('/product')
       reorderLeadTimeCell.textContent = product.reorderLeadTime;
       categoryNoCell.textContent = product.categoryNo;
       deleteCell.innerHTML =
-        '<button class="deletebutton" onclick="deleteRow(this)">Delete</button>';
+        '<button class="deletebutton" onclick="deleteRow(this)" data-ID="' +
+        product.id +
+        '">Delete</button>';
       updateCell.innerHTML =
         '<button class="updatebutton" onclick="">Update</button>';
 

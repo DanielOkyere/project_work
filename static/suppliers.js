@@ -1,9 +1,28 @@
 const supplierTable = document.getElementById('supplierTable');
 const ttable = document.getElementById('stable');
 
-function deleteRow(btn) {
-  var row = btn.parentNode.parentNode;
-  row.parentNode.removeChild(row);
+function deleteRow(supplier) {
+  var ID = supplier.getAttribute('data-id');
+  console.log(ID);
+  if (confirm('Are you sure you want to delete this entry?')) {
+    // this.submit();
+    // row.parentNode.removeChild(row);
+    var xhr = new XMLHttpRequest();
+    xhr.open('DELETE', '/supplier', true);
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var response = JSON.parse(xhr.responseText);
+        if (response.success) {
+          alert('Failed to delete entry.');
+        } else {
+          alert('successfully deleted');
+          window.location.reload();
+        }
+      }
+    };
+    xhr.send(JSON.stringify({ supplierNo: ID }));
+  }
 }
 
 const form = document.getElementById('supplierForm');
@@ -67,7 +86,7 @@ fetch('/supplier')
       const deleteCell = document.createElement('td');
       const updateCell = document.createElement('td');
 
-      idCell.textContent = supplier.id;
+      idCell.textContent = supplier.supplierNo;
       supplierNameCell.textContent = supplier.supplierName;
       supplierStreetCell.textContent = supplier.supplierStreet;
       supplierCityCell.textContent = supplier.supplierCity;
@@ -83,7 +102,9 @@ fetch('/supplier')
       contactEmailCell.textContent = supplier.contactEmalAddress;
       paymentTermsCell.textContent = supplier.paymentTerms;
       deleteCell.innerHTML =
-        '<button class="deletebutton" onclick="deleteRow(this)">Delete</button>';
+        '<button class="deletebutton" onclick="deleteRow(this)" data-ID="' +
+        supplier.supplierNo +
+        '">Delete</button>';
       updateCell.innerHTML =
         '<button class="updatebutton" onclick="">Update</button>';
 

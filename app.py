@@ -89,10 +89,10 @@ def employee():
         
     if request.method == 'DELETE':
         """Delete routes"""
-        body = request.json
-        data = db.delete_employee(employee_id=body['employeeNo'])
+        employee_id = request.json.get('employeeNo')
+        data = db.delete_employee(employee_id=employee_id)
         return jsonify({
-            "message" : "deleted employee {}".format(body['employeeNo'])
+            "message" : "deleted employee {}".format(employee_id)
         })
 
 
@@ -126,10 +126,10 @@ def product():
         })
 
     if request.method == 'DELETE':
-        body = request.json
-        result = db.delete_product(product_id=body['productNo'])
+        productNo = request.json.get('productNo')
+        data = db.delete_product(product_id=productNo)
         return jsonify({
-            "message": "deleted {}".format(body['productNo'])
+            "message": "deleted {}".format(productNo)
         })
 
 # Category Routes
@@ -150,26 +150,27 @@ def category_route():
         })
     if request.method == 'POST':
         body = request.json
-        category = db.add_category(body['categoryDesc']);
+        category = db.add_category(body['categoryDesc'])
         return jsonify({
             "message": "Category Created",
         })
         
     if request.method == 'DELETE':
-        body = request.json
-        category = db.delete_categories(category_id=body['purchaseOrderNo'])
+        categoryNo = request.json.get('categoryNo')
+        data = db.delete_categories(category_id=categoryNo)
         return jsonify({
-            "message": "deleted {}".format(body['purchaseOrderNo'])
+            "message": "deleted {}".format(categoryNo)
         })
 
 
 # Supplier Routes
-@app.route('/supplier', methods=['GET', 'POST'])
+@app.route('/supplier', methods=['GET', 'POST', 'DELETE'])
 def supplier_routes():
     """Defines the supplier routes"""
     if request.method == 'GET':
         suppliers = db.get_supplier()
         result = [{
+            "supplierNo" : supplier.supplierNo,
             "supplierName" : supplier.supplierName,
             "supplierStreet" : supplier.supplierStreet,
             "supplierCity" : supplier.supplierCity,
@@ -198,13 +199,14 @@ def supplier_routes():
         })
 
     if request.method == 'DELETE':
-        body = request.json
-        supplier = db.delete_supplier(supplierId=body['supplierId'])
+        supplierNo = request.json.get('supplierNo')
+        data = db.delete_supplier(supplierId=supplierNo)
         return jsonify({
-            "message": "deleted supplier {}".format(body['supplierId'])
+            "message": "deleted supplier {}".format(supplierNo)
         })
+    
 # Purchase Order Routes
-@app.route('/order', methods=['GET','POST'])
+@app.route('/order', methods=['GET','POST', 'DELETE'])
 def order_routes():
     """Defines order routes"""
     if request.method == 'GET':
@@ -230,9 +232,16 @@ def order_routes():
         return jsonify({
             "message": "created New order",
         })
+    
+    if request.method == 'DELETE':
+        purchaseOrderNo = request.json.get('purchaseOrderNo')
+        data = db.delete_categories(purchaseOrder_id=purchaseOrderNo)
+        return jsonify({
+            "message": "deleted {}".format(purchaseOrderNo)
+        })
 
 # Transaction Routes
-@app.route('/transaction', methods=['GET','POST'])
+@app.route('/transaction', methods=['GET','POST', 'DELETE'])
 def transact_routes():
     """Defines the transaction routes"""
     if request.method == 'GET':
@@ -260,6 +269,13 @@ def transact_routes():
         )
         return jsonify({
             "message":"created new Transaction"
+        })
+    
+    if request.method == 'DELETE':
+        transactionNo = request.json.get('transactionNo')
+        data = db.delete_transaction(transaction_id=transactionNo)
+        return jsonify({
+            "message": "deleted {}".format(transactionNo)
         })
 
 if __name__ == "__main__":

@@ -1,9 +1,28 @@
 const transactionTable = document.getElementById('transactionTable');
 const ttable = document.getElementById('ttable');
 
-function deleteRow(btn) {
-  var row = btn.parentNode.parentNode;
-  row.parentNode.removeChild(row);
+function deleteRow(transaction) {
+  var ID = transaction.getAttribute('data-id');
+  console.log(ID);
+  if (confirm('Are you sure you want to delete this entry?')) {
+    // this.submit();
+    // row.parentNode.removeChild(row);
+    var xhr = new XMLHttpRequest();
+    xhr.open('DELETE', '/transaction', true);
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var response = JSON.parse(xhr.responseText);
+        if (response.success) {
+          alert('Failed to delete entry.');
+        } else {
+          alert('successfully deleted');
+          window.location.reload();
+        }
+      }
+    };
+    xhr.send(JSON.stringify({ transactionNo: ID }));
+  }
 }
 
 const form = document.getElementById('transactionForm');
@@ -74,7 +93,9 @@ fetch('/transaction')
       purchaseOrderNoCell.textContent = transaction.purchaseOrder;
       productNoCell.textContent = transaction.productNo;
       deleteCell.innerHTML =
-        '<button class="deletebutton" onclick="deleteRow(this)">Delete</button>';
+        '<button class="deletebutton" onclick="deleteRow(this)" data-ID="' +
+        transaction.transactionNo +
+        '">Delete</button>';
       updateCell.innerHTML =
         '<button class="updatebutton" onclick="">Update</button>';
 

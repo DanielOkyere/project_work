@@ -2,9 +2,28 @@ const addEmployee = document.getElementById('addEmployee');
 const employeetable = document.getElementById('employeetable');
 const etable = document.getElementById('etable');
 
-function deleteRow(btn) {
-  var row = btn.parentNode.parentNode;
-  row.parentNode.removeChild(row);
+function deleteRow(employee) {
+  var ID = employee.getAttribute('data-id');
+  console.log(ID);
+  if (confirm('Are you sure you want to delete this entry?')) {
+    // this.submit();
+    // row.parentNode.removeChild(row);
+    var xhr = new XMLHttpRequest();
+    xhr.open('DELETE', '/employee', true);
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var response = JSON.parse(xhr.responseText);
+        if (response.success) {
+          alert('Failed to delete entry.');
+        } else {
+          alert('successfully deleted');
+          window.location.reload();
+        }
+      }
+    };
+    xhr.send(JSON.stringify({ employeeNo: ID }));
+  }
 }
 
 const form = document.getElementById('employeeForm');
@@ -60,7 +79,9 @@ fetch('/employee')
       nameCell.textContent = employee.name;
       emailCell.textContent = employee.email;
       deleteCell.innerHTML =
-        '<button class="deletebutton" onclick="deleteRow(this)">Delete</button>';
+        '<button class="deletebutton" onclick="deleteRow(this)" data-ID="' +
+        employee.employeeNo +
+        '">Delete</button>';
       updateCell.innerHTML =
         '<button class="updatebutton" onclick="">Update</button>';
 
